@@ -10,7 +10,7 @@
 
 ### Drilling-down into CS courses
 
-<img src="https://i.imgur.com/dOstRka.png" />
+<img src="https://i.imgur.com/HWzbfNe.png" />
 
 ### Drilling-down further into CS 271
 

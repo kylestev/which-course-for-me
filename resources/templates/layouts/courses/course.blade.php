@@ -20,6 +20,12 @@
 					<span>
 						<a href="{{ route('frontend.courses.show', [array_get($course, 'subject_id'), array_get($course, 'id')]) }}">More details</a>
 					</span>
+					&nbsp;&ndash;&nbsp;
+					<span>
+						{{ $course->current_sections() }}
+						{{ $course->current_sections() == 1 ? 'section' : 'sections' }}
+						available during {{ term_name(env('CURRENT_TERM')) }}
+					</span>
 				@else
 					<a href="{{ osu_catalog(array_get($course, 'subject_id'), array_get($course, 'level')) }}">
 						View on the official OSU Catalog
