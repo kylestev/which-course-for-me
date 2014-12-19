@@ -20,14 +20,13 @@ class ApiRootController extends Controller {
 		$content = [];
 
 		$routes = array_where(self::$router->getRoutes(), function ($key, $route) {
-			return str_is('api.*.show', $route->getName());
+			return (! str_is('frontend.*', $route->getName())) && str_is('*.show', $route->getName());
 		});
 
 		$routes = array_map(function ($route) {
 			$parts = explode('.', $route->getName());
-
-			$last_idx = sizeof($parts) - 2;
-			$name = implode('_', array_slice($parts, 1, $last_idx)) . '_url';
+			$last_idx = sizeof($parts) - 1;
+			$name = implode('_', array_slice($parts, 0, $last_idx)) . '_url';
 
 			$uri = getenv('APP_URL') . '/';
 			$uri .= str_replace('s}', '}', $route->uri());
