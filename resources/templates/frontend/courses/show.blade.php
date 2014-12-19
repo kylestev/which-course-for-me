@@ -2,7 +2,7 @@
 
 @section('content')
 
-      <div class="row course-row">
+      <div class="row container-fluid">
         <ol class="breadcrumb">
           <li>
             <a href="{{ route('frontend.subjects.index') }}">Subjects</a>

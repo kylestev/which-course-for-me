@@ -33,13 +33,9 @@
 			</div>
 		</nav>
 
-		<div class="container-fluid">
+		@yield('header')
 
-			@yield('header')
-
-			@yield('content')
-
-		</div>
+		@yield('content')
 
 	</div>
 

@@ -1,8 +1,6 @@
 @extends('layouts.frontend')
 
 @section('content')
-   
-	<div class="container-fluid">
 
 	@foreach($courses as $course)
 
@@ -12,7 +10,5 @@
 	])
 
 	@endforeach
-
-	</div>
 
 @stop
