@@ -33,10 +33,6 @@ class ScrapeSubject {
             if (Course::find(implode('', explode(' ', $info))) == null)
             {
                 if (in_array($info[strlen($info) - 1], ['H', 'X'])) continue;
-
-                var_dump($info);
-
-                echo 'scraping ' . $info;
             }
 
             \Queue::push('Courses\Jobs\Scraper\ScrapeCatalog', [
