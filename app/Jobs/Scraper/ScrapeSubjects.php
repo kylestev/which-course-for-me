@@ -2,6 +2,8 @@
 
 use Courses\Subject;
 
+use Illuminate\Database\Eloquent\Model;
+
 class ScrapeSubjects {
 
 	const CATALOG_URL = 'http://catalog.oregonstate.edu/SOC.aspx';
@@ -102,6 +104,8 @@ class ScrapeSubjects {
 					   $data['campus'] ?: 'corvallis', $data['term'] ?: '');
 
 		$contents = file_get_contents($url);
+
+		Model::unguard();
 
 		array_map(function ($subj)
 		{
