@@ -36,6 +36,7 @@ class ScrapeCatalog {
         }
         catch (\ErrorException $e)
         {
+            $job->release();
             throw $e;
         }
     }
