@@ -27,7 +27,7 @@ class AddPrereqsToCourses extends Migration {
 	{
 		Schema::table('courses', function(Blueprint $table)
 		{
-			$table->drop('prereqs');
+			$table->dropColumn('prereqs');
 		});
 	}
 

@@ -28,8 +28,8 @@ class AddRawLocationsAndTimesToSections extends Migration {
 	{
 		Schema::table('sections', function(Blueprint $table)
 		{
-			$table->drop('raw_times');
-			$table->drop('raw_locations');
+			$table->dropColumn('raw_times');
+			$table->dropColumn('raw_locations');
 		});
 	}
 

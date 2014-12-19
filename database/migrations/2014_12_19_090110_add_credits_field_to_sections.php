@@ -27,7 +27,7 @@ class AddCreditsFieldToSections extends Migration {
 	{
 		Schema::table('sections', function(Blueprint $table)
 		{
-			$table->drop('credits');
+			$table->dropColumn('credits');
 		});
 	}
 
