@@ -27,7 +27,7 @@
 
 				<div class="collapse navbar-collapse">
 					<ul class="nav navbar-nav">
-						<li><a href="/api">API</a></li>
+						<li><a href="{{ route('api.root') }}">API</a></li>
 					</ul>
 				</div>
 			</div>
@@ -57,14 +57,14 @@
 					<div class="col-md-1"></div>
 					<div class="col-md-5">
 						<ul class="nav nav-pills nav-stacked">
-							<li><a href="/about">About</a></li>
+							<li><a href="{{ route('frontend.about') }}">About</a></li>
 							<li><a href="http://resume.kylestev.io/">Author</a></li>
 						</ul>
 					</div>
 					<div class="col-md-5">
 						<ul class="nav nav-pills nav-stacked">
 							<li><a href="#">API Documentation</a></li>
-							<li><a href="/architecture">Backend Architecture</a></li>
+							<li><a href="{{ route('frontend.architecture') }}">Backend Architecture</a></li>
 						</ul>
 					</div>
 					<div class="col-md-1"></div>

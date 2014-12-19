@@ -16,8 +16,8 @@
 				a JSON REST API which can be used without authentication and is
 				not subject to rate limiting.
 			<p>
-				<a href="/about" class="btn btn-primary btn-lg">Learn more</a>
-				<a href="/api" class="btn btn-primary btn-lg">Access the API</a>
+				<a href="{{ route('frontend.about') }}" class="btn btn-primary btn-lg">Learn more</a>
+				<a href="{{ route('api.root') }}" class="btn btn-primary btn-lg">Access the API</a>
 			</p>
 		</div>
 
