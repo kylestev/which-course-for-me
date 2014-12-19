@@ -35,7 +35,7 @@ function title_case($s)
 		$words[$key] = choose_case($key, $word);
 	}
 
-    return implode(' ', $words);
+	return implode(' ', $words);
 }
 
 function osu_catalog($subj_id, $course_id)

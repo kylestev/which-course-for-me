@@ -49,7 +49,7 @@ class DatabaseSeeder extends Seeder {
 
 		$s = time();
 
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+		DB::statement('SET FOREIGN_KEY_CHECKS=0;');
 
 		$this->truncateTables();
 
