@@ -4,14 +4,14 @@
 
 <img src="https://i.imgur.com/QXmEea2.png" />
 
-### Subjects Overview
+### Subjects Overview - Page 2
 
-<img src="https://i.imgur.com/a0ztTf0.png" />
+<img src="https://i.imgur.com/mIkpGVs.png" />
 
-### Drilling-down into ANTH courses
+### Drilling-down into CS courses
 
-<img src="https://i.imgur.com/d1oBY2b.png" />
+<img src="https://i.imgur.com/dOstRka.png" />
 
-### Drilling-down further into ANTH 314
+### Drilling-down further into CS 271
 
-<img src="https://i.imgur.com/M1AVuzm.png" />
+<img src="https://i.imgur.com/SF7rGRC.png" />
