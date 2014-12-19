@@ -11,7 +11,6 @@ class Kernel extends ConsoleKernel {
 	 * @var array
 	 */
 	protected $commands = [
-		'Courses\Console\Commands\ImportPSV',
 		'Courses\Console\Commands\InspireCommand',
 	];
 
