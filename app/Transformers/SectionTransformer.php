@@ -27,13 +27,13 @@ class SectionTransformer extends Transformer {
 			'enrollment_current' => [
 				'cap' => (int) array_get($item, 'enrollment_current.cap'),
 				'current' => (int) array_get($item, 'enrollment_current.current'),
-				'available' => (int) array_get($item, 'enrollment_current.available'),
+				'available' => max((int) array_get($item, 'enrollment_current.available'), 0),
 			],
 
 			'enrollment_waitlist' => [
 				'cap' => (int) array_get($item, 'enrollment_waitlist.cap'),
 				'current' => (int) array_get($item, 'enrollment_waitlist.current'),
-				'available' => (int) array_get($item, 'enrollment_waitlist.available'),
+				'available' => max((int) array_get($item, 'enrollment_waitlist.available'), 0),
 			],
 
 			'credits' => (int) array_get($item, 'credits'),
