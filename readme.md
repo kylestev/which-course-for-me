@@ -2,7 +2,7 @@
 
 ### Site Index
 
-<img src="https://i.imgur.com/QXmEea2.png" />
+<img src="https://i.imgur.com/FzktOld.png" />
 
 ### Subjects Overview - Page 2
 
