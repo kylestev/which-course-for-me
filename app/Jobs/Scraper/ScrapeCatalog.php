@@ -13,6 +13,20 @@ class ScrapeCatalog {
 
     const CATALOG_URL = 'http://catalog.oregonstate.edu/CourseDetail.aspx?Columns=afghjklmopqrstuvz&SubjectCode=%s&CourseNumber=%s';
 
+    // http://stackoverflow.com/a/2087136/758310
+    private function DOMinnerHTML(\DOMElement $element)
+    {
+        $innerHTML = "";
+        $children  = $element->childNodes;
+
+        foreach ($children as $child)
+        {
+            $innerHTML .= $element->ownerDocument->saveHTML($child);
+        }
+
+        return trim($innerHTML);
+    }
+
     public function fire($job, $data)
     {
         try
@@ -21,7 +35,9 @@ class ScrapeCatalog {
             $job->delete();
         }
         catch (\ErrorException $e)
-        { }
+        {
+            throw $e;
+        }
     }
 
     public function work($data)
@@ -94,6 +110,8 @@ class ScrapeCatalog {
                 'term' => trim($row->childNodes->item(0)->textContent),
                 'section_number' => intval($row->childNodes->item(2)->textContent),
                 'credits' => intval($row->childNodes->item(3)->textContent),
+                'raw_times' => $this->DOMinnerHTML($row->childNodes->item(5)->childNodes->item(0)),
+                'raw_locations' => $this->DOMinnerHTML($row->childNodes->item(6)->childNodes->item(0)),
                 'instructor_id' => Instructor::firstOrCreate(['name' => $row->childNodes->item(4)->textContent])->id,
                 'section_type_id' => SectionType::firstOrCreate(['name' => $row->childNodes->item(8)->textContent])->id,
             ];
@@ -102,7 +120,6 @@ class ScrapeCatalog {
             {
                 $sec->$key = $value;
             }
-
 
             $current_enrollment = [
                 'cap' => intval($row->childNodes->item(10)->textContent),
