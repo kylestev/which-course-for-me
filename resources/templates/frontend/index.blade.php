@@ -29,6 +29,4 @@
 		To browse courses, head on over to <a href="{{ route('frontend.subjects.index') }}">the Subjects overview</a>.
 	</p>
 
-	</div>
-
 @stop
