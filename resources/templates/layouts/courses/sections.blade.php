@@ -26,10 +26,11 @@
               <table class="table table-striped">
                 <thead>
                   <tr>
-                    <!-- <th>Term</th> -->
                     <th>CRN</th>
                     <th>Section</th>
                     <th>Credits</th>
+                    <th>Meeting Times</th>
+                    <th>Location</th>
                     <th>Type</th>
                     <th>Instructor</th>
                     <th>Seats Filled</th>
@@ -40,10 +41,11 @@
                   @foreach (array_get($term, 'sections') as $section)
 
                     <tr>
-                      <!-- <td>{{ array_get($section, 'term') }}</td> -->
                       <td>{{ array_get($section, 'id') }}</td>
                       <td>{{ str_pad(array_get($section, 'section_number'), 3, '0', STR_PAD_LEFT) }}</td>
                       <td>{{ array_get($section, 'credits') }}</td>
+                      <td>{!! extract_times($section) !!}</td>
+                      <td>{!! array_get($section, 'raw_locations') !!}</td>
                       <td>{{ array_get($section, 'section_type.name') }}</td>
                       <td>{{ array_get($section, 'instructor.name') }}</td>
                       <td>

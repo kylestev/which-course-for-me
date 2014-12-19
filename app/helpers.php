@@ -52,3 +52,17 @@ function term_name($term)
 
 	return sprintf('%s 20%s', $mapping[$quarter], $year);
 }
+
+function extract_times($section)
+{
+	$times = array_get($section, 'raw_times');
+	if (str_contains($times, 'TBA'))
+	{
+		return $times;
+	}
+
+	$parts = explode('<br>', $times);
+	$parts = array_slice($parts, 0, sizeof($parts) - 1);
+
+	return implode('<br />', $parts);
+}
