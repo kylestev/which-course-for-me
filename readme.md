@@ -66,9 +66,7 @@ The REST API allows programmers to access information about OSU courses, section
 
 Every API route that returns a collection of resources supports pagination which allows clients to receive chunks of 25 elements at a time to iterate over all results.	
 
-#### Screenshots
+#### API Documentation
 
-##### Sections of CS161
-
-<img src="https://i.imgur.com/knMWqeW.png" />
+The docs are hosted on Apiary at [this address](http://docs.whichcourseforme.apiary.io/). You can try mock examples and see expected responses for different situations, including errors states.
 
