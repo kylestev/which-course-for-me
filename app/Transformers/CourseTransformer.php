@@ -22,6 +22,7 @@ class CourseTransformer extends Transformer {
 		return [
 			'course' => ['subjects.courses.show', ['id']],
 			'subject' => ['subjects.show', ['subject.subject_id']],
+			'sections' => ['subjects.courses.sections.index', ['subject.subject_id', 'id']],
 		];
 	}
 
