@@ -13,6 +13,7 @@ class SubjectTransformer extends Transformer {
 	protected function getLinkParams()
 	{
 		return [
+			'courses' => ['subjects.courses.index', ['id']],
 			'subject' => ['subjects.show', ['id']],
 			'subjects' => ['subjects.index', []],
 		];
