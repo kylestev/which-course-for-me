@@ -4,11 +4,6 @@
 
 	<h1>Which Course For Me Backend Architecture</h1>
 
-	<p>
-		What started out as a class assignment for Introduction to Databases turned into a full fledged
-		web application with a scalable architecture.
-	</p>
-
 	<h2>The Stack</h2>
 
 	<h3>Backend</h3>

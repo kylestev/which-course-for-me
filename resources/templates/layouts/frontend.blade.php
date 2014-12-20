@@ -59,7 +59,7 @@
 					</div>
 					<div class="col-md-5">
 						<ul class="nav nav-pills nav-stacked">
-							<li><a href="#">API Documentation</a></li>
+							<li><a href="http://docs.whichcourseforme.apiary.io/">API Documentation</a></li>
 							<li><a href="{{ route('frontend.architecture') }}">Backend Architecture</a></li>
 						</ul>
 					</div>
