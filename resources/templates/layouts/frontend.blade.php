@@ -74,7 +74,6 @@
 
 	</footer>
 
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.7/angular.min.js"></script>
 	<script src="https://code.jquery.com/jquery-2.1.2.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 </body>
