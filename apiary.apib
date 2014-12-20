@@ -1,46 +1,996 @@
 FORMAT: 1A
 
-# which-course-for-me
-Notes API is a *short texts saving* service similar to its physical paper presence on your table.
+# Which Course For Me
+Which Course For Me is a REST API providing access to data from the Oregon State Universities Course Catalog.
 
-# Group Notes
-Notes related resources of the **Notes API**
+# Group Subjects
+Subject and related resources of the **Which Course For Me API**
 
-## Notes Collection [/notes]
-### List all Notes [GET]
-+ Response 200 (application/json)
-
-        [{
-          "id": 1, "title": "Jogging in park"
-        }, {
-          "id": 2, "title": "Pick-up posters from post-office"
-        }]
-
-### Create a Note [POST]
-+ Request (application/json)
-
-        { "title": "Buy cheese and bread for breakfast." }
-
-+ Response 201 (application/json)
-
-        { "id": 3, "title": "Buy cheese and bread for breakfast." }
-
-## Note [/notes/{id}]
-A single Note object with all its details
+## Subjects Collection [/subjects?page]
+### List all Subjects [GET]
 
 + Parameters
-    + id (required, number, `1`) ... Numeric `id` of the Note to perform action with. Has example value.
 
-### Retrieve a Note [GET]
+    + page = `1` (optional, number, `1`)... The page number to access. Pages are grouped into offsets of 25. This means that requesting `page` 3 of a result set will, by default, return resources 51 - 75.
+
 + Response 200 (application/json)
 
-    + Header
+        {
+            "total": 128,
+            "per_page": 25,
+            "current_page": 1,
+            "last_page": 6,
+            "next_page_url": "https:\/\/api.which-course-for.me\/subjects\/?page=2",
+            "prev_page_url": null,
+            "from": 1,
+            "to": 25,
+            "data": [
+                {
+                    "id": "ACTG",
+                    "name": "Accounting",
+                    "_links": {
+                        "subject": "https:\/\/api.which-course-for.me\/subjects\/ACTG",
+                        "subjects": "https:\/\/api.which-course-for.me\/subjects"
+                    }
+                },
+                {
+                    "id": "AEC",
+                    "name": "Applied Economics",
+                    "_links": {
+                        "subject": "https:\/\/api.which-course-for.me\/subjects\/AEC",
+                        "subjects": "https:\/\/api.which-course-for.me\/subjects"
+                    }
+                },
+                {
+                    "id": "AED",
+                    "name": "Agricultural Education",
+                    "_links": {
+                        "subject": "https:\/\/api.which-course-for.me\/subjects\/AED",
+                        "subjects": "https:\/\/api.which-course-for.me\/subjects"
+                    }
+                },
+                {
+                    "id": "AG",
+                    "name": "Agriculture-General",
+                    "_links": {
+                        "subject": "https:\/\/api.which-course-for.me\/subjects\/AG",
+                        "subjects": "https:\/\/api.which-course-for.me\/subjects"
+                    }
+                },
+                {
+                    "id": "AHE",
+                    "name": "Adult Ed & Higher Ed Leadershp",
+                    "_links": {
+                        "subject": "https:\/\/api.which-course-for.me\/subjects\/AHE",
+                        "subjects": "https:\/\/api.which-course-for.me\/subjects"
+                    }
+                },
+                {
+                    "id": "ALS",
+                    "name": "Academic Learning Services",
+                    "_links": {
+                        "subject": "https:\/\/api.which-course-for.me\/subjects\/ALS",
+                        "subjects": "https:\/\/api.which-course-for.me\/subjects"
+                    }
+                },
+                {
+                    "id": "ANS",
+                    "name": "Animal Sciences",
+                    "_links": {
+                        "subject": "https:\/\/api.which-course-for.me\/subjects\/ANS",
+                        "subjects": "https:\/\/api.which-course-for.me\/subjects"
+                    }
+                },
+                {
+                    "id": "ANTH",
+                    "name": "Anthropology",
+                    "_links": {
+                        "subject": "https:\/\/api.which-course-for.me\/subjects\/ANTH",
+                        "subjects": "https:\/\/api.which-course-for.me\/subjects"
+                    }
+                },
+                {
+                    "id": "AREC",
+                    "name": "Agricultural & Resource Econom",
+                    "_links": {
+                        "subject": "https:\/\/api.which-course-for.me\/subjects\/AREC",
+                        "subjects": "https:\/\/api.which-course-for.me\/subjects"
+                    }
+                },
+                {
+                    "id": "ART",
+                    "name": "Art",
+                    "_links": {
+                        "subject": "https:\/\/api.which-course-for.me\/subjects\/ART",
+                        "subjects": "https:\/\/api.which-course-for.me\/subjects"
+                    }
+                },
+                {
+                    "id": "AS",
+                    "name": "Aerospace Studies",
+                    "_links": {
+                        "subject": "https:\/\/api.which-course-for.me\/subjects\/AS",
+                        "subjects": "https:\/\/api.which-course-for.me\/subjects"
+                    }
+                },
+                {
+                    "id": "ASL",
+                    "name": "American Sign Language",
+                    "_links": {
+                        "subject": "https:\/\/api.which-course-for.me\/subjects\/ASL",
+                        "subjects": "https:\/\/api.which-course-for.me\/subjects"
+                    }
+                },
+                {
+                    "id": "ATS",
+                    "name": "Atmospheric Sciences",
+                    "_links": {
+                        "subject": "https:\/\/api.which-course-for.me\/subjects\/ATS",
+                        "subjects": "https:\/\/api.which-course-for.me\/subjects"
+                    }
+                },
+                {
+                    "id": "BA",
+                    "name": "Business Administration",
+                    "_links": {
+                        "subject": "https:\/\/api.which-course-for.me\/subjects\/BA",
+                        "subjects": "https:\/\/api.which-course-for.me\/subjects"
+                    }
+                },
+                {
+                    "id": "BB",
+                    "name": "Biochemistry and Biophysics",
+                    "_links": {
+                        "subject": "https:\/\/api.which-course-for.me\/subjects\/BB",
+                        "subjects": "https:\/\/api.which-course-for.me\/subjects"
+                    }
+                },
+                {
+                    "id": "BEE",
+                    "name": "Biological & Ecological Engr",
+                    "_links": {
+                        "subject": "https:\/\/api.which-course-for.me\/subjects\/BEE",
+                        "subjects": "https:\/\/api.which-course-for.me\/subjects"
+                    }
+                },
+                {
+                    "id": "BHS",
+                    "name": "BioHealth Sciences",
+                    "_links": {
+                        "subject": "https:\/\/api.which-course-for.me\/subjects\/BHS",
+                        "subjects": "https:\/\/api.which-course-for.me\/subjects"
+                    }
+                },
+                {
+                    "id": "BI",
+                    "name": "Biology",
+                    "_links": {
+                        "subject": "https:\/\/api.which-course-for.me\/subjects\/BI",
+                        "subjects": "https:\/\/api.which-course-for.me\/subjects"
+                    }
+                },
+                {
+                    "id": "BIOE",
+                    "name": "Biological Engineering",
+                    "_links": {
+                        "subject": "https:\/\/api.which-course-for.me\/subjects\/BIOE",
+                        "subjects": "https:\/\/api.which-course-for.me\/subjects"
+                    }
+                },
+                {
+                    "id": "BOT",
+                    "name": "Botany and Plant Pathology",
+                    "_links": {
+                        "subject": "https:\/\/api.which-course-for.me\/subjects\/BOT",
+                        "subjects": "https:\/\/api.which-course-for.me\/subjects"
+                    }
+                },
+                {
+                    "id": "BRR",
+                    "name": "Bioresource Research",
+                    "_links": {
+                        "subject": "https:\/\/api.which-course-for.me\/subjects\/BRR",
+                        "subjects": "https:\/\/api.which-course-for.me\/subjects"
+                    }
+                },
+                {
+                    "id": "CBEE",
+                    "name": "Chem, Bio, Enviro Engineering",
+                    "_links": {
+                        "subject": "https:\/\/api.which-course-for.me\/subjects\/CBEE",
+                        "subjects": "https:\/\/api.which-course-for.me\/subjects"
+                    }
+                },
+                {
+                    "id": "CCE",
+                    "name": "Civil and Construction Engr",
+                    "_links": {
+                        "subject": "https:\/\/api.which-course-for.me\/subjects\/CCE",
+                        "subjects": "https:\/\/api.which-course-for.me\/subjects"
+                    }
+                },
+                {
+                    "id": "CE",
+                    "name": "Civil Engineering",
+                    "_links": {
+                        "subject": "https:\/\/api.which-course-for.me\/subjects\/CE",
+                        "subjects": "https:\/\/api.which-course-for.me\/subjects"
+                    }
+                },
+                {
+                    "id": "CEM",
+                    "name": "Construction Engineering Mngmt",
+                    "_links": {
+                        "subject": "https:\/\/api.which-course-for.me\/subjects\/CEM",
+                        "subjects": "https:\/\/api.which-course-for.me\/subjects"
+                    }
+                }
+            ]
+        }
 
-            X-My-Header: The Value
+## Subject [/subjects/{id}]
+A single Subject object with all its details
+
++ Parameters
+    + id (required, string, `CS`) ... String `id` of the Subject to perform action with.
+
+### Retrieve a Subject [GET]
++ Response 200 (application/json)
 
     + Body
 
-            { "id": 2, "title": "Pick-up posters from post-office" }
+            {
+                "data": {
+                    "id": "CS",
+                    "name": "Computer Science",
+                    "_links": {
+                        "subject": "https:\/\/api.which-course-for.me\/subjects\/CS",
+                        "subjects": "https:\/\/api.which-course-for.me\/subjects"
+                    }
+                }
+            }
 
-### Remove a Note [DELETE]
-+ Response 204
++ Response 404 (application/json)
+
+    + Body
+
+            {
+                "error_code": 404,
+                "message": "Subject not found",
+                "success": false
+            }
+
+# Group Courses
+Courses and related resources of the **Which Course For Me API**. Courses are nested under a specific Subject resource as a Course cannot exist without a Subject.
+
+## Courses Collection [/subjects/{subject_id}/courses?page]
+### List all Courses [GET]
+
++ Parameters
+
+    + subject_id (required, string)... The Subject resource to lookup Courses under.
+
+    + page = `1` (optional, number, `1`)... The page number to access. Pages are grouped into offsets of 25. This means that requesting `page` 3 of a result set will, by default, return resources 51 - 75.
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "total": 104,
+                "per_page": 25,
+                "current_page": 1,
+                "last_page": 5,
+                "next_page_url": "https:\/\/api.which-course-for.me\/subjects\/CS\/courses\/?page=2",
+                "prev_page_url": null,
+                "from": 1,
+                "to": 25,
+                "data": [
+                    {
+                        "id": "CS101",
+                        "level": 101,
+                        "title": "Computers: Applications and Implications",
+                        "description": "The varieties of computer hardware and software. The effects, positive and negative, of computers on human lives. Ethical implications of information technology. Hands-on experience with a variety of computer applications. Lec\/lab.",
+                        "prereqs": null,
+                        "subject": {
+                            "subject_id": "CS",
+                            "name": "Computer Science"
+                        },
+                        "_links": {
+                            "course": "https:\/\/api.which-course-for.me\/subjects\/CS101\/courses",
+                            "subject": "https:\/\/api.which-course-for.me\/subjects\/CS"
+                        }
+                    },
+                    {
+                        "id": "CS151",
+                        "level": 151,
+                        "title": "Introduction to Programming I With Embedded Control Lab",
+                        "description": "Thorough treatment of the basic elements of C, bitwise operations, flow of control, input\/output, functions, arrays, strings, and structures. Lec\/lab. CROSSLISTED as ECE 151.",
+                        "prereqs": "( (MTH 111 or MTH 112 or (MTH 251 or MTH 251H) ) or  Placement Test MPT(23)",
+                        "subject": {
+                            "subject_id": "CS",
+                            "name": "Computer Science"
+                        },
+                        "_links": {
+                            "course": "https:\/\/api.which-course-for.me\/subjects\/CS151\/courses",
+                            "subject": "https:\/\/api.which-course-for.me\/subjects\/CS"
+                        }
+                    },
+                    {
+                        "id": "CS160",
+                        "level": 160,
+                        "title": "Computer Science Orientation",
+                        "description": "Introduction to the computer science field and profession. Team problem solving. Introduction to writing computer programs. Lec\/lab.",
+                        "prereqs": "Wireless laptop required.",
+                        "subject": {
+                            "subject_id": "CS",
+                            "name": "Computer Science"
+                        },
+                        "_links": {
+                            "course": "https:\/\/api.which-course-for.me\/subjects\/CS160\/courses",
+                            "subject": "https:\/\/api.which-course-for.me\/subjects\/CS"
+                        }
+                    },
+                    {
+                        "id": "CS161",
+                        "level": 161,
+                        "title": "Introduction to Computer Science I",
+                        "description": "Overview of fundamental concepts of computer science. Introduction to problem solving, software engineering, and object-oriented programming. Includes algorithm design and program development. Lec\/lab.",
+                        "prereqs": "MTH 112* or  Placement Test MPT(33) or  Placement Test MPAL(061)\r\n     and \r\n    for CS Double Degree students: BA\/BS and (MTH 111 or MPT>=24 or MPAL>=061)",
+                        "subject": {
+                            "subject_id": "CS",
+                            "name": "Computer Science"
+                        },
+                        "_links": {
+                            "course": "https:\/\/api.which-course-for.me\/subjects\/CS161\/courses",
+                            "subject": "https:\/\/api.which-course-for.me\/subjects\/CS"
+                        }
+                    },
+                    {
+                        "id": "CS162",
+                        "level": 162,
+                        "title": "Introduction to Computer Science II",
+                        "description": "Basic data structures. Computer programming techniques and application of software engineering principles. Introduction to analysis of programs. Lec\/lab.",
+                        "prereqs": "CS 161 or EECS 161",
+                        "subject": {
+                            "subject_id": "CS",
+                            "name": "Computer Science"
+                        },
+                        "_links": {
+                            "course": "https:\/\/api.which-course-for.me\/subjects\/CS162\/courses",
+                            "subject": "https:\/\/api.which-course-for.me\/subjects\/CS"
+                        }
+                    },
+                    {
+                        "id": "CS165",
+                        "level": 165,
+                        "title": "Accelerated Introduction to Computer Science",
+                        "description": "Overview of the fundamental concepts of computer science. Introduction to problem solving, algorithm development, data types, and basic data structures. Introduction to analysis of algorithms and principles of software engineering. System development and computer programming using procedural\/object-oriented paradigms. (Note: Students may take either the CS 161\/162 sequence or CS 165, but cannot receive credit for both.) Offered via Ecampus only.",
+                        "prereqs": "(MTH 111 or  Placement Test MPT(24)) or  Placement Test MPAL(061) and (CS 225* or MTH 231*)\r\n     and \r\n    Ecampus students must have a BA or BS.",
+                        "subject": {
+                            "subject_id": "CS",
+                            "name": "Computer Science"
+                        },
+                        "_links": {
+                            "course": "https:\/\/api.which-course-for.me\/subjects\/CS165\/courses",
+                            "subject": "https:\/\/api.which-course-for.me\/subjects\/CS"
+                        }
+                    },
+                    {
+                        "id": "CS195",
+                        "level": 195,
+                        "title": "Introduction to Web Authoring",
+                        "description": "Techniques and tools for designing and publishing on the World Wide Web; hypertext and HTML; site and page design; media integration; issues raised by Internet publishing.",
+                        "prereqs": "CS 101 or equivalent.",
+                        "subject": {
+                            "subject_id": "CS",
+                            "name": "Computer Science"
+                        },
+                        "_links": {
+                            "course": "https:\/\/api.which-course-for.me\/subjects\/CS195\/courses",
+                            "subject": "https:\/\/api.which-course-for.me\/subjects\/CS"
+                        }
+                    },
+                    {
+                        "id": "CS199",
+                        "level": 199,
+                        "title": "Selected Topics",
+                        "description": "This course is repeatable for a maximum of 16 credits.",
+                        "prereqs": null,
+                        "subject": {
+                            "subject_id": "CS",
+                            "name": "Computer Science"
+                        },
+                        "_links": {
+                            "course": "https:\/\/api.which-course-for.me\/subjects\/CS199\/courses",
+                            "subject": "https:\/\/api.which-course-for.me\/subjects\/CS"
+                        }
+                    },
+                    {
+                        "id": "CS261",
+                        "level": 261,
+                        "title": "Data Structures",
+                        "description": "Abstract data types, dynamic arrays, linked lists, trees and graphs, binary search trees, hash tables, storage management, complexity analysis of data structures. Lec\/rec.",
+                        "prereqs": "(CS 162 or CS 165 or EECS 162) and (CS 225 or MTH 231)",
+                        "subject": {
+                            "subject_id": "CS",
+                            "name": "Computer Science"
+                        },
+                        "_links": {
+                            "course": "https:\/\/api.which-course-for.me\/subjects\/CS261\/courses",
+                            "subject": "https:\/\/api.which-course-for.me\/subjects\/CS"
+                        }
+                    },
+                    {
+                        "id": "CS262",
+                        "level": 262,
+                        "title": "Programming Projects in C++",
+                        "description": "Learning a second computer programming language. Elements of C++. Object-oriented programming. Experience team work on a large programming project.",
+                        "prereqs": "CS 261",
+                        "subject": {
+                            "subject_id": "CS",
+                            "name": "Computer Science"
+                        },
+                        "_links": {
+                            "course": "https:\/\/api.which-course-for.me\/subjects\/CS262\/courses",
+                            "subject": "https:\/\/api.which-course-for.me\/subjects\/CS"
+                        }
+                    },
+                    {
+                        "id": "CS271",
+                        "level": 271,
+                        "title": "Computer Architecture and Assembly Language",
+                        "description": "Introduction to functional organization and operation of digital computers. Coverage of assembly language; addressing, stacks, argument passing, arithmetic operations, decisions, macros, modularization, linkers and debuggers.",
+                        "prereqs": "(CS 151 or CS 161 or CS 165 or ECE 151)",
+                        "subject": {
+                            "subject_id": "CS",
+                            "name": "Computer Science"
+                        },
+                        "_links": {
+                            "course": "https:\/\/api.which-course-for.me\/subjects\/CS271\/courses",
+                            "subject": "https:\/\/api.which-course-for.me\/subjects\/CS"
+                        }
+                    },
+                    {
+                        "id": "CS275",
+                        "level": 275,
+                        "title": "Introduction to Databases",
+                        "description": "Design and implementation of relational databases, including data modeling with ER or UML diagrams, relational schema, SQL queries, relational algebra, user interfaces, and administration.",
+                        "prereqs": "(CS 162 or CS 165 or ECE 152)",
+                        "subject": {
+                            "subject_id": "CS",
+                            "name": "Computer Science"
+                        },
+                        "_links": {
+                            "course": "https:\/\/api.which-course-for.me\/subjects\/CS275\/courses",
+                            "subject": "https:\/\/api.which-course-for.me\/subjects\/CS"
+                        }
+                    },
+                    {
+                        "id": "CS295",
+                        "level": 295,
+                        "title": "Intermediate Web Authoring",
+                        "description": "Designing, developing, publishing, and maintaining dynamic websites; Web security and privacy issues; emerging Web technologies.",
+                        "prereqs": "CS 195 or equivalent (i.e., basic HTML and CSS)",
+                        "subject": {
+                            "subject_id": "CS",
+                            "name": "Computer Science"
+                        },
+                        "_links": {
+                            "course": "https:\/\/api.which-course-for.me\/subjects\/CS295\/courses",
+                            "subject": "https:\/\/api.which-course-for.me\/subjects\/CS"
+                        }
+                    },
+                    {
+                        "id": "CS312",
+                        "level": 312,
+                        "title": "Linux System Administration",
+                        "description": "Introduction to LINUX system administration. Network administration and routing. Internet services. Security issues.",
+                        "prereqs": "CS 344 or CS 311\r\n     and \r\n    \/or instructor approval.",
+                        "subject": {
+                            "subject_id": "CS",
+                            "name": "Computer Science"
+                        },
+                        "_links": {
+                            "course": "https:\/\/api.which-course-for.me\/subjects\/CS312\/courses",
+                            "subject": "https:\/\/api.which-course-for.me\/subjects\/CS"
+                        }
+                    },
+                    {
+                        "id": "CS321",
+                        "level": 321,
+                        "title": "Introduction to Theory of Computation",
+                        "description": "Survey of models of computation including finite automata, formal grammars, and Turing machines.",
+                        "prereqs": "CS 261 and (CS 225 or MTH 231)",
+                        "subject": {
+                            "subject_id": "CS",
+                            "name": "Computer Science"
+                        },
+                        "_links": {
+                            "course": "https:\/\/api.which-course-for.me\/subjects\/CS321\/courses",
+                            "subject": "https:\/\/api.which-course-for.me\/subjects\/CS"
+                        }
+                    },
+                    {
+                        "id": "CS325",
+                        "level": 325,
+                        "title": "Analysis of Algorithms",
+                        "description": "Recurrence relations, combinatorics, recursive algorithms, proofs of correctness.",
+                        "prereqs": "CS 261 and (CS 225 or MTH 231)",
+                        "subject": {
+                            "subject_id": "CS",
+                            "name": "Computer Science"
+                        },
+                        "_links": {
+                            "course": "https:\/\/api.which-course-for.me\/subjects\/CS325\/courses",
+                            "subject": "https:\/\/api.which-course-for.me\/subjects\/CS"
+                        }
+                    },
+                    {
+                        "id": "CS331",
+                        "level": 331,
+                        "title": "Introduction to Artificial Intelligence",
+                        "description": "Fundamental concepts in artificial intelligence using the unifying theme of an intelligent agent. Topics include agent architectures, search, games, logic and reasoning, and Bayesian networks.",
+                        "prereqs": "(CS 325 or CS 325H)",
+                        "subject": {
+                            "subject_id": "CS",
+                            "name": "Computer Science"
+                        },
+                        "_links": {
+                            "course": "https:\/\/api.which-course-for.me\/subjects\/CS331\/courses",
+                            "subject": "https:\/\/api.which-course-for.me\/subjects\/CS"
+                        }
+                    },
+                    {
+                        "id": "CS340",
+                        "level": 340,
+                        "title": "Introduction to Databases",
+                        "description": "Design and implementation of relational databases, including data modeling with ER or UML, diagrams, relational schema, SQL queries, relational algebra, user interfaces, and administration.",
+                        "prereqs": "CS 290",
+                        "subject": {
+                            "subject_id": "CS",
+                            "name": "Computer Science"
+                        },
+                        "_links": {
+                            "course": "https:\/\/api.which-course-for.me\/subjects\/CS340\/courses",
+                            "subject": "https:\/\/api.which-course-for.me\/subjects\/CS"
+                        }
+                    },
+                    {
+                        "id": "CS344",
+                        "level": 344,
+                        "title": "Operating Systems I",
+                        "description": "Introduction to operating systems using UNIX as the case study. System calls and utilities, fundamentals of processes and interprocess communication.",
+                        "prereqs": "CS 261 and (CS 271 or ECE 271)\r\n     and \r\n    experience programming in the C language.",
+                        "subject": {
+                            "subject_id": "CS",
+                            "name": "Computer Science"
+                        },
+                        "_links": {
+                            "course": "https:\/\/api.which-course-for.me\/subjects\/CS344\/courses",
+                            "subject": "https:\/\/api.which-course-for.me\/subjects\/CS"
+                        }
+                    },
+                    {
+                        "id": "CS352",
+                        "level": 352,
+                        "title": "Introduction to Usability Engineering",
+                        "description": "Basic principles of usability engineering methods for the design and evaluation of software systems. Includes the study of human-machine interactions, user interface characteristics and design strategies, software evaluation methods, and related guidelines and standards.",
+                        "prereqs": "(CS 151 or CS 161 or CS 165 or CS 295 or ECE 151)",
+                        "subject": {
+                            "subject_id": "CS",
+                            "name": "Computer Science"
+                        },
+                        "_links": {
+                            "course": "https:\/\/api.which-course-for.me\/subjects\/CS352\/courses",
+                            "subject": "https:\/\/api.which-course-for.me\/subjects\/CS"
+                        }
+                    },
+                    {
+                        "id": "CS361",
+                        "level": 361,
+                        "title": "Software Engineering I",
+                        "description": "Introduction to the \"front end\" of the software engineering lifecycle; requirements analysis and specification; design techniques; project management. (Writing Intensive Course)",
+                        "prereqs": null,
+                        "subject": {
+                            "subject_id": "CS",
+                            "name": "Computer Science"
+                        },
+                        "_links": {
+                            "course": "https:\/\/api.which-course-for.me\/subjects\/CS361\/courses",
+                            "subject": "https:\/\/api.which-course-for.me\/subjects\/CS"
+                        }
+                    },
+                    {
+                        "id": "CS362",
+                        "level": 362,
+                        "title": "Software Engineering II",
+                        "description": "Introduction to the \"back end\" of the software engineering lifecycle implementation; verification and validation; debugging; maintenance.",
+                        "prereqs": "CS 261\r\n     and \r\n    Experience with object-oriented programming and data structures (e.g. CS 161,  CS 162, CS 261). CS 361 is recommended but not required.",
+                        "subject": {
+                            "subject_id": "CS",
+                            "name": "Computer Science"
+                        },
+                        "_links": {
+                            "course": "https:\/\/api.which-course-for.me\/subjects\/CS362\/courses",
+                            "subject": "https:\/\/api.which-course-for.me\/subjects\/CS"
+                        }
+                    },
+                    {
+                        "id": "CS372",
+                        "level": 372,
+                        "title": "Introduction to Computer Networks",
+                        "description": "Computer network principles, fundamental networking concepts, packet-switching and circuit switching, TCP\/IP protocal layers, reliable data transfer, congestion control, flow control, packet forwarding and routing, MAC addressing, multiple access techniques. Lec. CROSSLISTED as ECE 372.",
+                        "prereqs": "CS 261 and (ECE 271 or CS 271)\r\n     and \r\n    C programming and Unix familiarity.",
+                        "subject": {
+                            "subject_id": "CS",
+                            "name": "Computer Science"
+                        },
+                        "_links": {
+                            "course": "https:\/\/api.which-course-for.me\/subjects\/CS372\/courses",
+                            "subject": "https:\/\/api.which-course-for.me\/subjects\/CS"
+                        }
+                    },
+                    {
+                        "id": "CS381",
+                        "level": 381,
+                        "title": "Programming Language Fundamentals",
+                        "description": "An introduction to the concepts found in a variety of programming languages. Programming languages as tools for problem solving. A brief introduction to languages from a number of different paradigms.",
+                        "prereqs": "CS 261 and (CS 225 or MTH 231)",
+                        "subject": {
+                            "subject_id": "CS",
+                            "name": "Computer Science"
+                        },
+                        "_links": {
+                            "course": "https:\/\/api.which-course-for.me\/subjects\/CS381\/courses",
+                            "subject": "https:\/\/api.which-course-for.me\/subjects\/CS"
+                        }
+                    },
+                    {
+                        "id": "CS391",
+                        "level": 391,
+                        "title": "Social and Ethical Issues in Computer Science",
+                        "description": "In-depth exploration of the social, psychological, political, and ethical issues surrounding the computer industry and the evolving information society. (Bacc Core Course)",
+                        "prereqs": "CS 101 or computer literacy.",
+                        "subject": {
+                            "subject_id": "CS",
+                            "name": "Computer Science"
+                        },
+                        "_links": {
+                            "course": "https:\/\/api.which-course-for.me\/subjects\/CS391\/courses",
+                            "subject": "https:\/\/api.which-course-for.me\/subjects\/CS"
+                        }
+                    }
+                ]
+            }
+
+## Course [/subjects/{subject_id}/courses/{course_id}]
+A single Course object with all its details
+
++ Parameters
+    + subject_id (required, string) ... String `subject_id` of the Subject to perform action with.
+    + course_id (required, string) ... String `course_id` of the Course to perform action with.
+
+### Retrieve a Course [GET]
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "data": {
+                    "id": "CS271",
+                    "level": 271,
+                    "title": "Computer Architecture and Assembly Language",
+                    "description": "Introduction to functional organization and operation of digital computers. Coverage of assembly language; addressing, stacks, argument passing, arithmetic operations, decisions, macros, modularization, linkers and debuggers.",
+                    "prereqs": "(CS 151 or CS 161 or CS 165 or ECE 151)",
+                    "subject": {
+                        "subject_id": "CS",
+                        "name": "Computer Science"
+                    },
+                    "_links": {
+                        "course": "https:\/\/api.which-course-for.me\/subjects\/CS271\/courses",
+                        "subject": "https:\/\/api.which-course-for.me\/subjects\/CS"
+                    }
+                }
+            }
+
++ Response 404 (application/json)
+
+    + Body
+
+            {
+                "error_code": 404,
+                "message": "Course (CS272) not found",
+                "success": false
+            }
+
+
+# Group Sections
+Sections and related resources of the **Which Course For Me API**. Sections are nested under a specific Course resource as a Section cannot exist without a Course.
+
+## Sections Collection [/subjects/{subject_id}/courses/{course_id}/sections?page]
+### List all Sections [GET]
+
++ Parameters
+
+    + subject_id (required, string) ... String `subject_id` of the Subject to perform action with.
+    + course_id (required, string) ... String `course_id` of the Course to perform action with.
+
+    + page = `1` (optional, number, `1`)... The page number to access. Pages are grouped into offsets of 25. This means that requesting `page` 3 of a result set will, by default, return resources 51 - 75.
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "total": 5,
+                "per_page": 25,
+                "current_page": 1,
+                "last_page": 1,
+                "next_page_url": null,
+                "prev_page_url": null,
+                "from": 1,
+                "to": 5,
+                "data": [
+                    {
+                        "id": 32885,
+                        "course_id": "CS271",
+                        "subject": {
+                            "subject_id": "CS",
+                            "name": "Computer Science"
+                        },
+                        "instructor": {
+                            "instructor_id": 1611,
+                            "name": "McGrath, D.",
+                            "email": null
+                        },
+                        "section_type": {
+                            "section_type_id": 1,
+                            "name": "Lecture"
+                        },
+                        "enrollment_current": {
+                            "cap": 120,
+                            "current": 77,
+                            "available": 43
+                        },
+                        "enrollment_waitlist": {
+                            "cap": 10,
+                            "current": 0,
+                            "available": 10
+                        },
+                        "credits": 4,
+                        "term": "W15",
+                        "section_number": 1,
+                        "fees": null,
+                        "notes": null,
+                        "_links": {
+                            "course": "https:\/\/api.which-course-for.me\/subjects\/32885\/courses",
+                            "section": "https:\/\/api.which-course-for.me\/subjects\/CS271\/courses\/32885\/sections",
+                            "sections": "https:\/\/api.which-course-for.me\/subjects\/32885\/courses\/\/sections",
+                            "section_type": "https:\/\/api.which-course-for.me\/section_types\/1",
+                            "subject": "https:\/\/api.which-course-for.me\/subjects\/CS"
+                        }
+                    },
+                    {
+                        "id": 36582,
+                        "course_id": "CS271",
+                        "subject": {
+                            "subject_id": "CS",
+                            "name": "Computer Science"
+                        },
+                        "instructor": {
+                            "instructor_id": 1612,
+                            "name": "Redfield, S.",
+                            "email": null
+                        },
+                        "section_type": {
+                            "section_type_id": 2,
+                            "name": "Streaming Media"
+                        },
+                        "enrollment_current": {
+                            "cap": 150,
+                            "current": 114,
+                            "available": 36
+                        },
+                        "enrollment_waitlist": {
+                            "cap": 0,
+                            "current": 0,
+                            "available": 0
+                        },
+                        "credits": 4,
+                        "term": "W15",
+                        "section_number": 400,
+                        "fees": null,
+                        "notes": null,
+                        "_links": {
+                            "course": "https:\/\/api.which-course-for.me\/subjects\/36582\/courses",
+                            "section": "https:\/\/api.which-course-for.me\/subjects\/CS271\/courses\/36582\/sections",
+                            "sections": "https:\/\/api.which-course-for.me\/subjects\/36582\/courses\/\/sections",
+                            "section_type": "https:\/\/api.which-course-for.me\/section_types\/2",
+                            "subject": "https:\/\/api.which-course-for.me\/subjects\/CS"
+                        }
+                    },
+                    {
+                        "id": 56563,
+                        "course_id": "CS271",
+                        "subject": {
+                            "subject_id": "CS",
+                            "name": "Computer Science"
+                        },
+                        "instructor": {
+                            "instructor_id": 3,
+                            "name": "Staff",
+                            "email": null
+                        },
+                        "section_type": {
+                            "section_type_id": 2,
+                            "name": "Streaming Media"
+                        },
+                        "enrollment_current": {
+                            "cap": 150,
+                            "current": 0,
+                            "available": 150
+                        },
+                        "enrollment_waitlist": {
+                            "cap": 0,
+                            "current": 0,
+                            "available": 0
+                        },
+                        "credits": 4,
+                        "term": "Sp15",
+                        "section_number": 400,
+                        "fees": null,
+                        "notes": null,
+                        "_links": {
+                            "course": "https:\/\/api.which-course-for.me\/subjects\/56563\/courses",
+                            "section": "https:\/\/api.which-course-for.me\/subjects\/CS271\/courses\/56563\/sections",
+                            "sections": "https:\/\/api.which-course-for.me\/subjects\/56563\/courses\/\/sections",
+                            "section_type": "https:\/\/api.which-course-for.me\/section_types\/2",
+                            "subject": "https:\/\/api.which-course-for.me\/subjects\/CS"
+                        }
+                    },
+                    {
+                        "id": 72487,
+                        "course_id": "CS271",
+                        "subject": {
+                            "subject_id": "CS",
+                            "name": "Computer Science"
+                        },
+                        "instructor": {
+                            "instructor_id": 1611,
+                            "name": "McGrath, D.",
+                            "email": null
+                        },
+                        "section_type": {
+                            "section_type_id": 1,
+                            "name": "Lecture"
+                        },
+                        "enrollment_current": {
+                            "cap": 18,
+                            "current": 0,
+                            "available": 18
+                        },
+                        "enrollment_waitlist": {
+                            "cap": 10,
+                            "current": 0,
+                            "available": 10
+                        },
+                        "credits": 4,
+                        "term": "Su15",
+                        "section_number": 1,
+                        "fees": null,
+                        "notes": null,
+                        "_links": {
+                            "course": "https:\/\/api.which-course-for.me\/subjects\/72487\/courses",
+                            "section": "https:\/\/api.which-course-for.me\/subjects\/CS271\/courses\/72487\/sections",
+                            "sections": "https:\/\/api.which-course-for.me\/subjects\/72487\/courses\/\/sections",
+                            "section_type": "https:\/\/api.which-course-for.me\/section_types\/1",
+                            "subject": "https:\/\/api.which-course-for.me\/subjects\/CS"
+                        }
+                    },
+                    {
+                        "id": 73410,
+                        "course_id": "CS271",
+                        "subject": {
+                            "subject_id": "CS",
+                            "name": "Computer Science"
+                        },
+                        "instructor": {
+                            "instructor_id": 1612,
+                            "name": "Redfield, S.",
+                            "email": null
+                        },
+                        "section_type": {
+                            "section_type_id": 2,
+                            "name": "Streaming Media"
+                        },
+                        "enrollment_current": {
+                            "cap": 150,
+                            "current": 0,
+                            "available": 150
+                        },
+                        "enrollment_waitlist": {
+                            "cap": 0,
+                            "current": 0,
+                            "available": 0
+                        },
+                        "credits": 4,
+                        "term": "Su15",
+                        "section_number": 400,
+                        "fees": null,
+                        "notes": null,
+                        "_links": {
+                            "course": "https:\/\/api.which-course-for.me\/subjects\/73410\/courses",
+                            "section": "https:\/\/api.which-course-for.me\/subjects\/CS271\/courses\/73410\/sections",
+                            "sections": "https:\/\/api.which-course-for.me\/subjects\/73410\/courses\/\/sections",
+                            "section_type": "https:\/\/api.which-course-for.me\/section_types\/2",
+                            "subject": "https:\/\/api.which-course-for.me\/subjects\/CS"
+                        }
+                    }
+                ]
+            }
+
+## Section [/subjects/{subject_id}/courses/{course_id}/sections/{section_id}]
+A single Section object with all its details
+
++ Parameters
+    + subject_id (required, string) ... String `subject_id` of the Subject to perform action with.
+    + course_id (required, string) ... String `course_id` of the Course to perform action with.
+    + section_id (required, string) ... String `section_id` of the Course to perform action with.
+
+### Retrieve a Section [GET]
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "data": {
+                    "id": 32885,
+                    "course_id": "CS271",
+                    "subject": {
+                        "subject_id": "CS",
+                        "name": "Computer Science"
+                    },
+                    "instructor": {
+                        "instructor_id": 1611,
+                        "name": "McGrath, D.",
+                        "email": null
+                    },
+                    "section_type": {
+                        "section_type_id": 1,
+                        "name": "Lecture"
+                    },
+                    "enrollment_current": {
+                        "cap": 120,
+                        "current": 77,
+                        "available": 43
+                    },
+                    "enrollment_waitlist": {
+                        "cap": 10,
+                        "current": 0,
+                        "available": 10
+                    },
+                    "credits": 4,
+                    "term": "W15",
+                    "section_number": 1,
+                    "fees": null,
+                    "notes": null,
+                    "_links": {
+                        "course": "https:\/\/api.which-course-for.me\/subjects\/32885\/courses",
+                        "section": "https:\/\/api.which-course-for.me\/subjects\/CS271\/courses\/32885\/sections",
+                        "sections": "https:\/\/api.which-course-for.me\/subjects\/32885\/courses\/\/sections",
+                        "section_type": "https:\/\/api.which-course-for.me\/section_types\/1",
+                        "subject": "https:\/\/api.which-course-for.me\/subjects\/CS"
+                    }
+                }
+            }
+
++ Response 404 (application/json)
+
+    + Body
+
+            {
+                "error_code": 404,
+                "message": "Section (32884) not found under Course (CS271)",
+                "success": false
+            }
