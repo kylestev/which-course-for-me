@@ -2,9 +2,7 @@
 
 use Illuminate\Http\JsonResponse;
 
-use Courses\Instructor;
 use Courses\Http\Controllers\Controller;
-use Courses\Http\Requests\CreateInstructorRequest;
 use Courses\Repositories\Instructor\InstructorRepositoryInterface;
 use Courses\Transformers\InstructorTransformer;
 

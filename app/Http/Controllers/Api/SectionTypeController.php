@@ -2,7 +2,6 @@
 
 use Illuminate\Http\JsonResponse;
 
-use Courses\SectionType;
 use Courses\Http\Controllers\Controller;
 use Courses\Repositories\SectionType\SectionTypeRepositoryInterface;
 use Courses\Transformers\SectionTypeTransformer;
