@@ -1,7 +1,10 @@
 <?php namespace Courses\Repositories\Section;
 
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+
 use Courses\Course;
 use Courses\Section;
+use Courses\Exceptions\NotFoundException;
 
 class DbCourseSectionRepository implements CourseSectionRepositoryInterface {
 
@@ -36,9 +39,17 @@ class DbCourseSectionRepository implements CourseSectionRepositoryInterface {
 
 	public function find($courseId, $crn)
 	{
-		return Section::with('section_type', 'course.subject', 'enrollment_current', 'enrollment_waitlist', 'instructor')
-						->findOrFail($crn)
-						->toArray();
+		try
+		{
+			return Section::with('section_type', 'course.subject', 'enrollment_current', 'enrollment_waitlist', 'instructor')
+							->whereCourseId($courseId)
+							->findOrFail($crn)
+							->toArray();
+		}
+		catch (ModelNotFoundException $e)
+		{
+			throw new NotFoundException(sprintf('Section (%s) not found under Course (%s)', $crn, $courseId));
+		}
 	}
 
 	public function getAllByCourseId($courseId)
