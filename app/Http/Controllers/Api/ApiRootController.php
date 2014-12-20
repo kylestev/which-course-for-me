@@ -29,7 +29,7 @@ class ApiRootController extends Controller {
 			$name = implode('_', array_slice($parts, 0, $last_idx)) . '_url';
 
 			$uri = getenv('APP_URL') . '/';
-			$uri .= str_replace('s}', '}', $route->uri());
+			$uri .= str_replace('s}', '_id}', $route->uri());
 
 			return ['name' => $name, 'uri' => $uri];
 		}, $routes);
