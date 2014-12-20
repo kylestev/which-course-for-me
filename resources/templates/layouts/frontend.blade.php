@@ -50,21 +50,20 @@
 
 			<div class="row">
 				<div class="col-lg-12">
-					<div class="col-md-4">
+					<div class="col-md-1"></div>
+					<div class="col-md-5">
 						<ul class="nav nav-pills nav-stacked">
+							<li><a href="http://docs.whichcourseforme.apiary.io/">API Documentation</a></li>
 							<li><a href="http://resume.kylestev.io/">Author</a></li>
 						</ul>
 					</div>
-					<div class="col-md-4">
-						<ul class="nav nav-pills nav-stacked">
-							<li><a href="http://docs.whichcourseforme.apiary.io/">API Documentation</a></li>
-						</ul>
-					</div>
-					<div class="col-md-4">
+					<div class="col-md-5">
 						<ul class="nav nav-pills nav-stacked">
 							<li><a href="{{ route('frontend.architecture') }}">Backend Architecture</a></li>
+							<li><a href="https://github.com/kylestev/which-course-for-me">Source Code</a></li>
 						</ul>
 					</div>
+					<div class="col-md-1"></div>
 				</div>
 			</div>
 
