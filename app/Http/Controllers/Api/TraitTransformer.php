@@ -30,7 +30,7 @@ trait TraitTransformer {
 		}
 
 		$this->response->setData($data);
-		$this->response->setJsonOptions(JSON_PRETTY_PRINT);
+		$this->response->setJsonOptions(JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
 
 		return $this->response;
 	}
