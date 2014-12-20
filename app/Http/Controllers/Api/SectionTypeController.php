@@ -4,17 +4,42 @@ use Illuminate\Http\JsonResponse;
 
 use Courses\SectionType;
 use Courses\Http\Controllers\Controller;
-use Courses\Http\Requests\Request;
 use Courses\Repositories\SectionType\SectionTypeRepositoryInterface;
 use Courses\Transformers\SectionTypeTransformer;
 
-class SectionTypeController extends ApiController {
+class SectionTypeController extends Controller {
 
-	public function __construct(SectionTypeRepositoryInterface $sectionTypeRepo,
-								JsonResponse $response,
-								SectionTypeTransformer $transformer)
+	use TraitTransformer;
+
+	protected $sectionTypeRepo;
+
+	protected $response;
+
+	protected $transformer;
+
+	public function __construct(
+		SectionTypeRepositoryInterface $sectionTypeRepo,
+		JsonResponse $response,
+		SectionTypeTransformer $transformer
+	)
 	{
-		parent::__construct($sectionTypeRepo, $response, $transformer);
+		$this->sectionTypeRepo = $sectionTypeRepo;
+		$this->response = $response;
+		$this->transformer = $transformer;
+	}
+
+	public function index()
+	{
+		return $this->createJsonResponse(
+			$this->sectionTypeRepo->all()
+		);
+	}
+
+	public function show($instructor_id)
+	{
+		return $this->createJsonResponse(
+			$this->sectionTypeRepo->find($instructor_id)
+		);
 	}
 
 }

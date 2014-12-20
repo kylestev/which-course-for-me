@@ -8,47 +8,35 @@ use Courses\Http\Requests\CreateSubjectRequest;
 use Courses\Repositories\Subject\SubjectRepositoryInterface;
 use Courses\Transformers\SubjectTransformer;
 
-class SubjectController extends ApiController {
+class SubjectController extends Controller {
+
+	use TraitTransformer;
+
+	protected $response;
+
+	protected $subjectRepo;
+
+	protected $transformer;
 
 	public function __construct(SubjectRepositoryInterface $subjectRepo,
 								JsonResponse $response,
 								SubjectTransformer $transformer)
 	{
-		parent::__construct($subjectRepo, $response, $transformer);
+		$this->response = $response;
+		$this->subjectRepo = $subjectRepo;
+		$this->transformer = $transformer;
 	}
 
-	public function store(CreateSubjectRequest $request)
+	public function index()
 	{
-		$input = $request->only('subjcode', 'name');
-
-		return Subject::create($input);
+		return $this->createJsonResponse($this->subjectRepo->all()->toArray());
 	}
 
-	public function update($id)
+	public function show($subject_id)
 	{
-		$keys = ['subjcode', 'name'];
-
-		$updates = array_where(\Input::only($keys), function ($key, $value) use ($keys)
-		{
-			return ! is_null($value) && in_array($key, $keys);
-		});
-
-		if (sizeof($updates) === 0)
-		{
-			throw new \Exception('No valid fields to update.');
-		}
-
-		$subject = Subject::findOrFail($id);
-		foreach ($updates as $key => $value) {
-			$subject->$key = $value;
-		}
-
-		if (! $subject->save())
-		{
-			// todo: handle error
-		}
-
-		return $subject;
+		return $this->createJsonResponse(
+			$this->subjectRepo->find($subject_id)
+		);
 	}
 
 }

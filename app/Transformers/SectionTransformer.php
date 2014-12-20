@@ -48,9 +48,9 @@ class SectionTransformer extends Transformer {
 	protected function getLinkParams()
 	{
 		return [
-			'course' => ['courses.show', ['id']],
-			'section' => ['courses.sections.show', ['course_id', 'id']],
-			'sections' => ['courses.sections.show', ['id']],
+			'course' => ['subjects.courses.show', ['id']],
+			'section' => ['subjects.courses.sections.show', ['course_id', 'id']],
+			'sections' => ['subjects.courses.sections.show', ['id']],
 			'section_type' => ['section_types.show', ['section_type.section_type_id']],
 			'subject' => ['subjects.show', ['subject.subject_id']],
 		];

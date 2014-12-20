@@ -27,7 +27,7 @@ class DbCourseRepository implements CourseRepositoryInterface {
 		{
 			return Course::with('subject')
 						->whereSubjectId($subject_id)
-						->paginate();
+						->paginate(25);
 		}
 		catch (ModelNotFoundException $e)
 		{

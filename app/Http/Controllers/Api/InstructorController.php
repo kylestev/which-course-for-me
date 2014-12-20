@@ -8,20 +8,39 @@ use Courses\Http\Requests\CreateInstructorRequest;
 use Courses\Repositories\Instructor\InstructorRepositoryInterface;
 use Courses\Transformers\InstructorTransformer;
 
-class InstructorController extends ApiController {
+class InstructorController extends Controller {
 
-	public function __construct(InstructorRepositoryInterface $instructorRepo,
-								JsonResponse $response,
-								InstructorTransformer $transformer)
+	use TraitTransformer;
+
+	protected $instructorRepo;
+
+	protected $response;
+
+	protected $transformer;
+
+	public function __construct(
+		InstructorRepositoryInterface $instructorRepo,
+		JsonResponse $response,
+		InstructorTransformer $transformer
+	)
 	{
-		parent::__construct($instructorRepo, $response, $transformer);
+		$this->instructorRepo = $instructorRepo;
+		$this->response = $response;
+		$this->transformer = $transformer;
 	}
 
-	public function store(CreateInstructorRequest $request)
+	public function index()
 	{
-		$input = $request->only('name', 'email');
+		return $this->createJsonResponse(
+			$this->instructorRepo->all()
+		);
+	}
 
-		return Instructor::create($input);
+	public function show($instructor_id)
+	{
+		return $this->createJsonResponse(
+			$this->instructorRepo->find($instructor_id)
+		);
 	}
 
 }

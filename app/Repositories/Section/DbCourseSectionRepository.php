@@ -38,7 +38,6 @@ class DbCourseSectionRepository implements CourseSectionRepositoryInterface {
 	{
 		return Section::with('section_type', 'course.subject', 'enrollment_current', 'enrollment_waitlist', 'instructor')
 						->findOrFail($crn)
-						->first()
 						->toArray();
 	}
 

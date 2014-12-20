@@ -20,7 +20,7 @@ class CourseTransformer extends Transformer {
 	protected function getLinkParams()
 	{
 		return [
-			'course' => ['courses.show', ['id']],
+			'course' => ['subjects.courses.show', ['id']],
 			'subject' => ['subjects.show', ['subject.subject_id']],
 		];
 	}

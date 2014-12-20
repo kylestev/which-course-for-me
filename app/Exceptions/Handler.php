@@ -38,7 +38,7 @@ class Handler extends ExceptionHandler {
 	{
 		if ($e instanceof APIException)
 		{
-			if (str_is('api/*', $request->url()))
+			if (str_is('*api.*', $request->url()))
 			{
 				return $e->getResponse();
 			}

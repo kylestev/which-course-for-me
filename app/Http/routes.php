@@ -20,14 +20,20 @@ Route::group(['namespace' => 'Api', 'domain' => sprintf('api.%s', env('APP_DOMAI
 		'uses' => 'ApiRootController@index'
 	]);
 
-	Route::resource('courses', 'CourseController');
-	Route::resource('courses.sections', 'CourseSectionController');
+	Route::resource('instructors', 'InstructorController',
+					['only' => ['index', 'show']]);
 
-	Route::resource('instructors', 'InstructorController');
+	Route::resource('section_types', 'SectionTypeController',
+					['only' => ['index', 'show']]);
 
-	Route::resource('section_types', 'SectionTypeController');
+	Route::resource('subjects', 'SubjectController',
+					['only' => ['index', 'show']]);
 
-	Route::resource('subjects', 'SubjectController');
+	Route::resource('subjects.courses', 'CourseController',
+					['only' => ['index', 'show']]);
+
+	Route::resource('subjects.courses.sections', 'SectionController',
+					['only' => ['index', 'show']]);
 });
 
 Route::group(['namespace' => 'Frontend', 'domain' => env('APP_DOMAIN')], function ()
