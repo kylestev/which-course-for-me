@@ -44,11 +44,6 @@ Route::group(['namespace' => 'Frontend', 'domain' => env('APP_DOMAIN')], functio
 					->with('subjects', $repo->all(), 'data');
 	});
 
-	Route::get('about', ['as' => 'frontend.about', function ()
-	{
-		return View::make('frontend.about');
-	}]);
-
 	Route::get('architecture', ['as' => 'frontend.architecture', function ()
 	{
 		return View::make('frontend.architecture');
