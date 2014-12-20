@@ -66,7 +66,11 @@ Route::group(['namespace' => 'Frontend', 'domain' => env('APP_DOMAIN')], functio
 
 });
 
-Route::get('scrape', function ()
+if (App::environment() == 'local')
 {
-	Queue::push('Courses\Jobs\Scraper\ScrapeSubjects@scrape', ['term' => 'W15', 'campus' => 'corvallis']);
-});
+	Route::get('scrape', function ()
+	{
+		Queue::push('Courses\Jobs\Scraper\ScrapeSubjects@scrape', ['term' => 'W15', 'campus' => 'corvallis']);
+	});
+}
+
