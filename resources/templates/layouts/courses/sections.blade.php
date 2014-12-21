@@ -22,8 +22,8 @@
 		<div id="sectionsByTerm" class="tab-content">
 		  @foreach($terms as $term)
 
-			<div class="tab-pane fade {{ ($first == $term['id']) ? 'active' : '' }} in" id="{{ $term['id'] }}">
-			  <table class="table table-striped">
+			<div class="tab-pane table-responsive fade {{ ($first == $term['id']) ? 'active' : '' }} in" id="{{ $term['id'] }}">
+			  <table class="table table-bordered table-hover">
 				<thead>
 				  <tr>
 					<th>CRN</th>
@@ -50,9 +50,8 @@
 					  <td>{{ array_get($section, 'instructor.name') }}</td>
 					  <td>
 						<em>
-						  {{ max(array_get($section, 'enrollment_current.available'), 0) }} 
-						  seat{{ array_get($section, 'enrollment_current.available') == 1 ? '' : 's' }} left!
-						  &nbsp; ({{ array_get($section, 'enrollment_current.current') }} / {{ array_get($section, 'enrollment_current.cap') }})
+							{{ array_get($section, 'enrollment_current.current') }}
+							/ {{ array_get($section, 'enrollment_current.cap') }}
 						</em>
 					  </td>
 					  <td>
@@ -60,9 +59,8 @@
 						  Unavailable.
 						@else
 						<em>
-						  {{ max(array_get($section, 'enrollment_waitlist.available'), 0) }} 
-						  seat{{ array_get($section, 'enrollment_waitlist.available') == 1 ? '' : 's' }} left!
-						  &nbsp; ({{ array_get($section, 'enrollment_waitlist.current') }} / {{ array_get($section, 'enrollment_waitlist.cap') }})
+							{{ array_get($section, 'enrollment_waitlist.current') }}
+							/ {{ array_get($section, 'enrollment_waitlist.cap') }}
 						</em>
 						@endif
 					  </td>
