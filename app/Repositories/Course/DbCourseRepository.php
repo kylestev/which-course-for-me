@@ -21,17 +21,10 @@ class DbCourseRepository implements CourseRepositoryInterface {
 		}
 	}
 
-	public function findBySubjectId($subject_id)
+	private function findBySubjectId($subject_id)
 	{
-		try
-		{
-			return Course::with('subject')
-						->whereSubjectId($subject_id);
-		}
-		catch (ModelNotFoundException $e)
-		{
-			throw new NotFoundException('Course not found');
-		}
+		return Course::with('subject')
+					->whereSubjectId($subject_id);
 	}
 
 	public function paginateResults($subject_id)
