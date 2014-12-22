@@ -66,3 +66,8 @@ function extract_times($section)
 
 	return implode('<br />', $parts);
 }
+
+function cdn_url($resource)
+{
+	return sprintf('//%s/%s', env('APP_CDN'), $resource);
+}
