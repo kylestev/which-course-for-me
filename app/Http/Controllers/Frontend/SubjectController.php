@@ -16,16 +16,19 @@ class SubjectController extends FrontendController {
 	}
 
 	public function show(
+		SubjectRepositoryInterface $subjectRepo,
 		CourseRepositoryInterface $repo,
 		$subject_id
 	)
 	{
+		$subj = $subjectRepo->find($subject_id);
 		$courses = $repo->findBySubjectId($subject_id);
 
 		return $this->view->make('frontend.subjects.show', [
 			'subject_id' => $subject_id,
 			'courses' => $courses,
 			'single_page' => true,
+			'title' => sprintf('Which Course For Me | %s (%s) Courses', $subj['name'], $subj['id']),
 		]);
 	}
 

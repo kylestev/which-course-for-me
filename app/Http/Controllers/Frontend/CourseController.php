@@ -46,6 +46,7 @@ class CourseController extends FrontendController {
 			'course' => $course,
 			'single_page' => true,
 			'terms' => $terms,
+			'title' => sprintf('Which Course For Me | %s - %s', $course['id'], title_case($course['title'])),
 		]);
 	}
 
