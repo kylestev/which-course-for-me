@@ -53,6 +53,24 @@ class Handler extends ExceptionHandler {
 		}
 		elseif ($this->isHttpException($e))
 		{
+			if (str_is('*api.*', $request->url()))
+			{
+				$content = [
+					'error' => $e->getMessage(),
+					'code' => $e->getStatusCode(),
+				];
+
+				$code = $e->getStatusCode();
+				$message = 'An unknown error has occurred!';
+
+				if ($code == 404)
+				{
+					$message = 'Resource not found';
+				}
+
+				throw new APIException($message, $code);
+			}
+
 			return $this->renderHttpException($e);
 		}
 
