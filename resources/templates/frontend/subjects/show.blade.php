@@ -8,12 +8,12 @@
 				<a href="{{ route('frontend.subjects.index') }}">Subjects</a>
 			</li>
 			<li>
-				{{ $subject_id }} Courses
+				{{ array_get($subj, 'id') }} Courses
 			</li>
 		</ol>
 	</div>
 
-	<h1>{{ $subject_id }} Courses</h1>
+	<h1>{{ array_get($subj, 'name') }} Courses</h1>
 
 	<hr />
 

@@ -25,7 +25,7 @@ class SubjectController extends FrontendController {
 		$courses = $repo->paginateResults($subject_id);
 
 		return $this->view->make('frontend.subjects.show', [
-			'subject_id' => $subject_id,
+			'subj' => $subj,
 			'courses' => $courses,
 			'single_page' => true,
 			'title' => sprintf('Which Course For Me | %s (%s) Courses', $subj['name'], $subj['id']),
