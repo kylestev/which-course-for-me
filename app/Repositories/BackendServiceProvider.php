@@ -22,8 +22,8 @@ class BackendServiceProvider extends ServiceProvider {
 		);
 
 		$this->app->bind(
-			'Courses\Repositories\Section\CourseSectionRepositoryInterface',
-			'Courses\Repositories\Section\DbCourseSectionRepository'
+			'Courses\Repositories\Section\SectionRepositoryInterface',
+			'Courses\Repositories\Section\DbSectionRepository'
 		);
 
 		$this->app->bind(

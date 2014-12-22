@@ -6,7 +6,7 @@ use Courses\Course;
 use Courses\Section;
 use Courses\Exceptions\NotFoundException;
 
-class DbCourseSectionRepository implements CourseSectionRepositoryInterface {
+class DbSectionRepository implements SectionRepositoryInterface {
 
 	private function sortSections($sections)
 	{

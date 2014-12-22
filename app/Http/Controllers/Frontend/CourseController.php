@@ -2,7 +2,7 @@
 
 use Courses\Course;
 use Courses\Repositories\Course\CourseRepositoryInterface;
-use Courses\Repositories\Section\CourseSectionRepositoryInterface;
+use Courses\Repositories\Section\SectionRepositoryInterface;
 use Courses\Transformers\CourseTransformer;
 
 class CourseController extends FrontendController {
@@ -16,7 +16,7 @@ class CourseController extends FrontendController {
 
 	public function show(
 		CourseRepositoryInterface $repo,
-		CourseSectionRepositoryInterface $sectionRepo,
+		SectionRepositoryInterface $sectionRepo,
 		$subject_id,
 		$course_id
 	)

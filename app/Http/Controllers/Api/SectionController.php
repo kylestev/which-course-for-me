@@ -3,7 +3,7 @@
 use Illuminate\Http\JsonResponse;
 
 use Courses\Http\Controllers\Controller;
-use Courses\Repositories\Section\CourseSectionRepositoryInterface;
+use Courses\Repositories\Section\SectionRepositoryInterface;
 use Courses\Transformers\SectionTransformer;
 
 class SectionController extends Controller {
@@ -17,7 +17,7 @@ class SectionController extends Controller {
 	protected $transformer;
 
 	public function __construct(
-		CourseSectionRepositoryInterface $sectionRepo,
+		SectionRepositoryInterface $sectionRepo,
 		JsonResponse $response,
 		SectionTransformer $transformer
 	)

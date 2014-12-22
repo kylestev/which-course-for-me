@@ -2,7 +2,7 @@
 
 use Courses\Repositories\RepositoryInterface;
 
-interface CourseSectionRepositoryInterface extends RepositoryInterface {
+interface SectionRepositoryInterface extends RepositoryInterface {
 
 	public function all($courseId);
 	public function find($courseId, $crn);
