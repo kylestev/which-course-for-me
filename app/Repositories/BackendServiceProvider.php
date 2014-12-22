@@ -32,11 +32,6 @@ class BackendServiceProvider extends ServiceProvider {
 		);
 
 		$this->app->bind(
-			'Courses\Repositories\Section\InstructorSectionRepositoryInterface',
-			'Courses\Repositories\Section\DbInstructorSectionRepository'
-		);
-
-		$this->app->bind(
 			'Courses\Repositories\SectionType\SectionTypeRepositoryInterface',
 			'Courses\Repositories\SectionType\DbSectionTypeRepository'
 		);
