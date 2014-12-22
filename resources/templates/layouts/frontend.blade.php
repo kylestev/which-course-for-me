@@ -2,7 +2,7 @@
 <head>
 	<title>{{ isset($title) ? $title : 'Which Course For Me' }}</title>
 	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"> -->
-	<link rel="stylesheet" href="/css/bootstrap.min.css">
+	<link rel="stylesheet" href="{{ cdn_url('css/bootstrap.min.css') }}">
 	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css"> -->
 	<style type="text/css">
 		* {
