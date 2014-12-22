@@ -23,10 +23,26 @@
 
 	@foreach($courses as $course)
 
-			@include('layouts.courses.course', [
-				'course' => $course,
-				'single_page' => false,
-			])
+		<div>
+			<div class="page-header">
+				<h2> {{ array_get($course, 'subject.id') }} {{ array_get($course, 'level') }} &nbsp;
+					<small>{{ array_get($course, 'title') }}</small>
+				</h2>
+			</div>
+			<blockquote>
+					{{ array_get($course, 'description') }}
+			</blockquote>
+			<span>
+				{{ $course->current_sections() }}
+				{{ $course->current_sections() == 1 ? 'section' : 'sections' }}
+				available during {{ term_name(env('CURRENT_TERM')) }}
+			</span>
+			&nbsp;&ndash;&nbsp;
+			<span>
+				<a href="{{ route('frontend.courses.show', [array_get($course, 'subject_id'), array_get($course, 'id')]) }}">More details</a>
+			</span>
+		</div>
+
 
 	@endforeach
 
