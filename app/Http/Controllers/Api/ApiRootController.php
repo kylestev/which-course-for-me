@@ -1,18 +1,24 @@
 <?php namespace Courses\Http\Controllers\Api;
 
 use Illuminate\Contracts\Cache\Factory as CacheFactory;
-use Illuminate\Contracts\View\Factory as ViewFactory;
 use Illuminate\Http\JsonResponse;
 
 use Courses\Http\Controllers\Controller;
 
 class ApiRootController extends Controller {
 
+	use TraitTransformer;
+
 	protected $cache;
 
-	public function __construct(CacheFactory $cache)
+	public function __construct(
+		CacheFactory $cache,
+		JsonResponse $response
+	)
 	{
 		$this->cache = $cache;
+		$this->response = $response;
+		$this->transformer = null;
 	}
 
 	private function getRoutes()
@@ -48,18 +54,10 @@ class ApiRootController extends Controller {
 		});
 	}
 
-	public function index(ViewFactory $view, JsonResponse $response)
+	public function index()
 	{
 		$content = $this->getCachedRoutes();
-		return $this->createResponse($response, $content);
-	}
-
-	private function createResponse($response, $data)
-	{
-		$response->setData($data);
-		$response->setJsonOptions(JSON_PRETTY_PRINT);
-
-		return $response;
+		return $this->createJsonResponse($content);;
 	}
 
 }
