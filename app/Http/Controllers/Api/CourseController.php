@@ -29,7 +29,7 @@ class CourseController extends Controller {
 
 	public function index($subject_id)
 	{
-		return $this->createJsonResponse($this->courseRepo->findBySubjectId($subject_id)->toArray());
+		return $this->createJsonResponse($this->courseRepo->paginateResults($subject_id)->toArray());
 	}
 
 	public function show($subject_id, $course_id)

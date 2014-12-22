@@ -19,11 +19,21 @@ class DbSectionTypeRepository implements SectionTypeRepositoryInterface {
 		}
 	}
 
+	private function getAll()
+	{
+		return SectionType::orderBy('id', 'asc');
+	}
+
 	public function all()
 	{
-		return SectionType::orderBy('id', 'asc')
-							->paginate(25)
-							->toArray();
+		return $this->getAll()->toArray();
+	}
+
+	public function paginateResults()
+	{
+		return $this->getAll()
+					->paginate(pagination_pages())
+					->toArray();
 	}
 
 }

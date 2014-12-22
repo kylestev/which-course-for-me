@@ -27,7 +27,7 @@ class SubjectController extends Controller {
 
 	public function index()
 	{
-		return $this->createJsonResponse($this->subjectRepo->all()->toArray());
+		return $this->createJsonResponse($this->subjectRepo->paginateResults()->toArray());
 	}
 
 	public function show($subject_id)

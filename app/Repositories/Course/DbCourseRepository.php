@@ -26,8 +26,7 @@ class DbCourseRepository implements CourseRepositoryInterface {
 		try
 		{
 			return Course::with('subject')
-						->whereSubjectId($subject_id)
-						->paginate(25);
+						->whereSubjectId($subject_id);
 		}
 		catch (ModelNotFoundException $e)
 		{
@@ -35,12 +34,11 @@ class DbCourseRepository implements CourseRepositoryInterface {
 		}
 	}
 
-	public function all()
+	public function paginateResults($subject_id)
 	{
-		return Course::with('subject')
-					->orderBy('id', 'asc')
-					->paginate(25)
-					->toArray();
+		$res = $this->findBySubjectId($subject_id)->paginate(pagination_pages());
+
+		return $res;
 	}
 
 }

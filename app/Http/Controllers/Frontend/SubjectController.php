@@ -11,7 +11,7 @@ class SubjectController extends FrontendController {
 	public function index(SubjectRepositoryInterface $repo)
 	{
 		return $this->view->make('frontend.subjects.index', [
-			'subjects' => $repo->all(),
+			'subjects' => $repo->paginateResults(),
 		]);
 	}
 
@@ -22,7 +22,7 @@ class SubjectController extends FrontendController {
 	)
 	{
 		$subj = $subjectRepo->find($subject_id);
-		$courses = $repo->findBySubjectId($subject_id);
+		$courses = $repo->paginateResults($subject_id);
 
 		return $this->view->make('frontend.subjects.show', [
 			'subject_id' => $subject_id,

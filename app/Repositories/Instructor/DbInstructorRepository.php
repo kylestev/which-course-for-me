@@ -1,5 +1,7 @@
 <?php namespace Courses\Repositories\Instructor;
 
+use Paginator;
+
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 use Courses\Instructor;
@@ -20,10 +22,9 @@ class DbInstructorRepository implements InstructorRepositoryInterface {
 		}
 	}
 
-	public function all()
+	public function paginateResults()
 	{
-		return Instructor::paginate(25)
-						->toArray();
+		return Instructor::paginate(pagination_pages());
 	}
 
 }

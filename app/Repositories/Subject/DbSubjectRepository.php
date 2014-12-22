@@ -16,9 +16,10 @@ class DbSubjectRepository implements SubjectRepositoryInterface {
 		}
 	}
 
-	public function all()
+	public function paginateResults()
 	{
-		return Subject::orderBy('id', 'asc')->paginate(25);
+		return Subject::orderBy('id', 'asc')
+						->paginate(pagination_pages());
 	}
 
 }

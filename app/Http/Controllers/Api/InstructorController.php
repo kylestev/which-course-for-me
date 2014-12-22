@@ -30,7 +30,7 @@ class InstructorController extends Controller {
 	public function index()
 	{
 		return $this->createJsonResponse(
-			$this->instructorRepo->all()
+			$this->instructorRepo->paginateResults()->toArray()
 		);
 	}
 

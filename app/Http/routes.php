@@ -41,7 +41,7 @@ Route::group(['namespace' => 'Frontend', 'domain' => env('APP_DOMAIN')], functio
 	Route::get('/', function (SubjectRepositoryInterface $repo)
 	{
 		return View::make('frontend.index')
-					->with('subjects', $repo->all(), 'data');
+					->with('subjects', $repo->paginateResults(), 'data');
 	});
 
 	Route::get('architecture', ['as' => 'frontend.architecture', function ()

@@ -23,7 +23,7 @@ class CourseController extends FrontendController {
 	{
 		$course = $repo->find($course_id);
 
-		$sections = $sectionRepo->all($course_id, false);
+		$sections = $sectionRepo->all($course_id);
 
 		$terms = [];
 		foreach ($sections as $section)

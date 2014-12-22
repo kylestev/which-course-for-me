@@ -30,7 +30,7 @@ class SectionTypeController extends Controller {
 	public function index()
 	{
 		return $this->createJsonResponse(
-			$this->sectionTypeRepo->all()
+			$this->sectionTypeRepo->paginateResults()
 		);
 	}
 

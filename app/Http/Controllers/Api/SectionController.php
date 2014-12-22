@@ -30,7 +30,7 @@ class SectionController extends Controller {
 	public function index($subject_id, $course_id)
 	{
 		return $this->createJsonResponse(
-			$this->sectionRepo->all($course_id)
+			$this->sectionRepo->paginateResults($course_id)
 		);
 	}
 

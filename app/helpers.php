@@ -71,3 +71,8 @@ function cdn_url($resource)
 {
 	return sprintf('//%s/%s', env('APP_CDN'), $resource);
 }
+
+function pagination_pages()
+{
+	return (int) env('PAGINATION_LENGTH') ?: 25;
+}

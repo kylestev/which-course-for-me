@@ -5,6 +5,6 @@ use Courses\Repositories\RepositoryInterface;
 interface SubjectRepositoryInterface extends RepositoryInterface {
 
 	public function find($id);
-	public function all();
+	public function paginateResults();
 
 }

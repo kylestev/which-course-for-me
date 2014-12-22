@@ -22,27 +22,22 @@ class DbCourseSectionRepository implements CourseSectionRepositoryInterface {
 		});
 	}
 
-	public function all($courseId, $paginate = true)
+	private function getAllByCourseId($courseId)
 	{
-		$res = Section::with('section_type', 'course.subject', 'enrollment_current', 'enrollment_waitlist', 'instructor')
+		return Section::with('section_type', 'course.subject', 'enrollment_current', 'enrollment_waitlist', 'instructor')
 						->whereCourseId($courseId);
+	}
 
-		if ($paginate)
-		{
-			return $res->paginate(25)->toArray();
-		}
-		else
-		{
-			return $this->sortSections($res->get()->toArray());
-		}
+	public function all($courseId)
+	{
+		return $this->getAllByCourseId($courseId)->get()->toArray();
 	}
 
 	public function find($courseId, $crn)
 	{
 		try
 		{
-			return Section::with('section_type', 'course.subject', 'enrollment_current', 'enrollment_waitlist', 'instructor')
-							->whereCourseId($courseId)
+			return $this->getAllByCourseId($courseId)
 							->findOrFail($crn)
 							->toArray();
 		}
@@ -52,13 +47,12 @@ class DbCourseSectionRepository implements CourseSectionRepositoryInterface {
 		}
 	}
 
-	public function getAllByCourseId($courseId)
+	public function paginateResults($courseId)
 	{
-		return Course::with('section_type', 'course.subject', 'enrollment_current', 'enrollment_waitlist', 'instructor')
-						->findOrFail($courseId)
-						->sections()
-						->paginate(250)
-						->toArray();
+		$results = $this->getAllByCourseId($courseId);
+		$paginated = $results->paginate(pagination_pages())->toArray();
+		array_set($paginated, 'data', array_get($paginated, 'data'));
+		return $paginated;
 	}
 
 }

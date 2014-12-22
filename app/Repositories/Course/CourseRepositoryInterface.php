@@ -4,8 +4,8 @@ use Courses\Repositories\RepositoryInterface;
 
 interface CourseRepositoryInterface extends RepositoryInterface {
 
-	public function all();
 	public function find($id);
 	public function findBySubjectId($subject_id);
+	public function paginateResults($subject_id);
 
 }
