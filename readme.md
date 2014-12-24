@@ -8,6 +8,8 @@ the [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) final 
 
 In short, this project scrapes the Oregon State University Course Catalog, and displays the information to users in a visually appealing manner. This project also provides a JSON REST API for others to consume. More details on that below.
 
+Checkout the live deployment [here](https://which-course-for.me/).
+
 ## Deploying
 
 If you're feeling ambitious and want to get this setup on a dev environment follow these steps.
