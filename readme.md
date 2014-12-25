@@ -10,6 +10,10 @@ In short, this project scrapes the Oregon State University Course Catalog, and d
 
 Checkout the live deployment [here](https://which-course-for.me/).
 
+## Notice
+
+This project is under active development. Most features work, but the UI should be expected to change.
+
 ## Deploying
 
 If you're feeling ambitious and want to get this setup on a dev environment follow these steps.
