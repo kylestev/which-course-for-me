@@ -1,3 +1,5 @@
 /vendor
 .env
 .DS_Store
+bootstrap/cache/services.json
+
