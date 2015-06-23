@@ -1,19 +1,22 @@
-<?php namespace Courses;
+<?php
+
+namespace Courses;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Subject extends Model {
+class Subject extends Model
+{
 
-	protected $table = 'subjects';
+    protected $table = 'subjects';
 
-	public static function bySubjcode($subjcode)
-	{
-		return Subject::whereSubjcode($subjcode)->first();
-	}
+    public static function bySubjcode($subjcode)
+    {
+        return Subject::whereSubjcode($subjcode)->first();
+    }
 
-	public function courses()
-	{
-		return $this->hasMany('\Courses\Course');
-	}
+    public function courses()
+    {
+        return $this->hasMany(Course::class);
+    }
 
 }

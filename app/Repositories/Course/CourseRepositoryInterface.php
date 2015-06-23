@@ -2,9 +2,11 @@
 
 use Courses\Repositories\RepositoryInterface;
 
-interface CourseRepositoryInterface extends RepositoryInterface {
+interface CourseRepositoryInterface extends RepositoryInterface
+{
 
-	public function find($id);
-	public function paginateResults($subject_id);
+    public function find($id);
+    public function paginateResults($subject_id);
+    public function findBySubjectId($subject_id);
 
 }

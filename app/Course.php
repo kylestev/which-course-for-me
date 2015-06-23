@@ -2,23 +2,33 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-class Course extends Model {
+class Course extends Model
+{
 
-	protected $table = 'courses';
+    protected $table = 'courses';
 
-	public function sections()
-	{
-		return $this->hasMany('\Courses\Section');
-	}
+    protected $casts = [
+        'level' => 'int',
+    ];
 
-	public function current_sections()
-	{
-		return $this->sections()->whereTerm(env('CURRENT_TERM'))->count();
-	}
+    public function getTitleAttribute()
+    {
+        return title_case($this->attributes['title']);
+    }
 
-	public function subject()
-	{
-		return $this->belongsTo('\Courses\Subject', 'subject_id', 'id');
-	}
+    public function sections()
+    {
+        return $this->hasMany('\Courses\Section');
+    }
+
+    public function current_sections()
+    {
+        return $this->sections()->whereTerm(env('CURRENT_TERM'))->count();
+    }
+
+    public function subject()
+    {
+        return $this->belongsTo('\Courses\Subject', 'subject_id', 'id');
+    }
 
 }

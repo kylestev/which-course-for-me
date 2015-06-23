@@ -1,9 +1,12 @@
-<?php namespace Courses;
+<?php
+
+namespace Courses;
 
 use Illuminate\Database\Eloquent\Model;
 
-class SectionType extends Model {
+class SectionType extends Model
+{
 
-	protected $table = 'section_types';
+    protected $table = 'section_types';
 
 }

@@ -1,21 +1,27 @@
-<?php namespace Courses\Transformers;
+<?php
 
-class SectionTypeTransformer extends Transformer {
+namespace Courses\Transformers;
 
-	protected function transformItem($item)
-	{
-		return [
-			'id' => array_get($item, 'id'),
-			'name' => array_get($item, 'name'),
-		];
-	}
+use Courses\SectionType;
+use League\Fractal\TransformerAbstract;
 
-	protected function getLinkParams()
-	{
-		return [
-			'section_type' => ['section_types.show', ['id']],
-			'section_types' => ['section_types.index', []],
-		];
-	}
+class SectionTypeTransformer extends TransformerAbstract
+{
+
+    public function transform(SectionType $sectionType)
+    {
+        return [
+            'id'   => $sectionType->id,
+            'name' => $sectionType->name,
+        ];
+    }
+
+    protected function getLinkParams()
+    {
+        return [
+            'section_type'  => ['section_types.show', ['id']],
+            'section_types' => ['section_types.index', []],
+        ];
+    }
 
 }

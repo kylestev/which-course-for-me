@@ -1,40 +1,39 @@
 <?php namespace Courses\Http\Controllers\Api;
 
-use Illuminate\Http\JsonResponse;
-
 use Courses\Http\Controllers\Controller;
 use Courses\Repositories\Subject\SubjectRepositoryInterface;
 use Courses\Transformers\SubjectTransformer;
+use Illuminate\Http\JsonResponse;
 
-class SubjectController extends Controller {
+class SubjectController extends Controller
+{
 
-	use TraitTransformer;
+    use TraitTransformer;
 
-	protected $response;
+    protected $response;
 
-	protected $subjectRepo;
+    protected $subjectRepo;
 
-	protected $transformer;
+    protected $transformer;
 
-	public function __construct(SubjectRepositoryInterface $subjectRepo,
-								JsonResponse $response,
-								SubjectTransformer $transformer)
-	{
-		$this->response = $response;
-		$this->subjectRepo = $subjectRepo;
-		$this->transformer = $transformer;
-	}
+    public function __construct(SubjectRepositoryInterface $subjectRepo,
+        JsonResponse $response,
+        SubjectTransformer $transformer) {
+        $this->response    = $response;
+        $this->subjectRepo = $subjectRepo;
+        $this->transformer = $transformer;
+    }
 
-	public function index()
-	{
-		return $this->createJsonResponse($this->subjectRepo->paginateResults()->toArray());
-	}
+    public function index()
+    {
+        return $this->createJsonResponse($this->subjectRepo->paginateResults()->all());
+    }
 
-	public function show($subject_id)
-	{
-		return $this->createJsonResponse(
-			$this->subjectRepo->find($subject_id)
-		);
-	}
+    public function show($subject_id)
+    {
+        return $this->createJsonResponse(
+            $this->subjectRepo->find($subject_id)
+        );
+    }
 
 }

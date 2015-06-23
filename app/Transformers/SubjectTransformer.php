@@ -1,22 +1,28 @@
-<?php namespace Courses\Transformers;
+<?php
 
-class SubjectTransformer extends Transformer {
+namespace Courses\Transformers;
 
-	protected function transformItem($item)
-	{
-		return [
-			'id' => array_get($item, 'id'),
-			'name' => array_get($item, 'name'),
-		];
-	}
+use Courses\Subject;
+use League\Fractal\TransformerAbstract;
 
-	protected function getLinkParams()
-	{
-		return [
-			'courses' => ['subjects.courses.index', ['id']],
-			'subject' => ['subjects.show', ['id']],
-			'subjects' => ['subjects.index', []],
-		];
-	}
+class SubjectTransformer extends TransformerAbstract
+{
+
+    public function transform(Subject $subject)
+    {
+        return [
+            'id'   => $subject->id,
+            'name' => $subject->name,
+        ];
+    }
+
+    protected function getLinkParams()
+    {
+        return [
+            'courses'  => ['subjects.courses.index', ['id']],
+            'subject'  => ['subjects.show', ['id']],
+            'subjects' => ['subjects.index', []],
+        ];
+    }
 
 }

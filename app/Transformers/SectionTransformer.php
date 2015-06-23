@@ -1,59 +1,71 @@
-<?php namespace Courses\Transformers;
+<?php
 
-class SectionTransformer extends Transformer {
+namespace Courses\Transformers;
 
-	protected function transformItem($item)
-	{
-		return [
-			'id' => (int) array_get($item, 'id'),
-			'course_id' => array_get($item, 'course_id'),
+use Courses\Section;
+use League\Fractal\TransformerAbstract;
 
-			'subject' => [
-				'subject_id' => array_get($item, 'course.subject.id'),
-				'name' => array_get($item, 'course.subject.name'),
-			],
+class SectionTransformer extends TransformerAbstract
+{
 
-			'instructor' => [
-				'instructor_id' => (int) array_get($item, 'instructor.id'),
-				'name' => array_get($item, 'instructor.name'),
-				'email' => array_get($item, 'instructor.email'),
-			],
+    public $availableIncludes = ['course'];
+    public $defaultIncludes   = ['instructor', 'section_type', 'subject'];
 
-			'section_type' => [
-				'section_type_id' => (int) array_get($item, 'section_type.id'),
-				'name' => array_get($item, 'section_type.name'),
-			],
+    public function transform(Section $section)
+    {
+        return [
+            'id'                  => $section->id,
+            'course_id'           => $section->course_id,
 
-			'enrollment_current' => [
-				'cap' => (int) array_get($item, 'enrollment_current.cap'),
-				'current' => (int) array_get($item, 'enrollment_current.current'),
-				'available' => max((int) array_get($item, 'enrollment_current.available'), 0),
-			],
+            'enrollment_current'  => [
+                'cap'       => $section->enrollment_current->cap,
+                'current'   => $section->enrollment_current->current,
+                'available' => max($section->enrollment_current->available, 0),
+            ],
 
-			'enrollment_waitlist' => [
-				'cap' => (int) array_get($item, 'enrollment_waitlist.cap'),
-				'current' => (int) array_get($item, 'enrollment_waitlist.current'),
-				'available' => max((int) array_get($item, 'enrollment_waitlist.available'), 0),
-			],
+            'enrollment_waitlist' => [
+                'cap'       => $section->enrollment_waitlist->cap,
+                'current'   => $section->enrollment_waitlist->current,
+                'available' => max($section->enrollment_waitlist->available, 0),
+            ],
 
-			'credits' => (int) array_get($item, 'credits'),
-			'term' => array_get($item, 'term'),
-			'section_number' => (int) array_get($item, 'section_number'),
-			'fees' => array_get($item, 'fees'),
-			'notes' => array_get($item, 'notes'),
-			// 'updated_at' => $item['updated_at'],
-		];
-	}
+            'credits'             => $section->credits,
+            'term'                => $section->term,
+            'section_number'      => $section->section_number,
+            'fees'                => $section->fees,
+            'notes'               => $section->notes,
+        ];
+    }
 
-	protected function getLinkParams()
-	{
-		return [
-			'course' => ['subjects.courses.show', ['id']],
-			'section' => ['subjects.courses.sections.show', ['course_id', 'id']],
-			'sections' => ['subjects.courses.sections.show', ['id']],
-			'section_type' => ['section_types.show', ['section_type.section_type_id']],
-			'subject' => ['subjects.show', ['subject.subject_id']],
-		];
-	}
+    public function includeCourse(Section $section)
+    {
+        return $this->item($section->course, new CourseTransformer);
+    }
+
+    public function includeInstructor(Section $section)
+    {
+        return $this->item($section->instructor, new InstructorTransformer);
+    }
+
+    public function includeSectionType(Section $section)
+    {
+        return $this->item($section->section_type, new SectionTypeTransformer);
+    }
+
+    public function includeSubject(Section $section)
+    {
+        return $this->item($section->course->subject, new SubjectTransformer);
+    }
+
+    protected function getLinkParams()
+    {
+        return [
+            'course'       => ['subjects.courses.show', ['id']],
+            'section'      => ['subjects.courses.sections.show', ['course_id', 'id']],
+            'sections'     => ['subjects.courses.sections.show', ['id']],
+            'section_type' => ['section_types.show', ['section_type.section_type_id']],
+            'subject'      => ['subjects.show', ['subject.subject_id']],
+        ];
+    }
 
 }

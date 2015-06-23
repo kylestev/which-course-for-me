@@ -1,16 +1,23 @@
-<?php namespace Courses;
+<?php
+
+namespace Courses;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Instructor extends Model {
+class Instructor extends Model
+{
 
-	protected $table = 'instructors';
+    protected $table = 'instructors';
 
-	protected $fillable = ['name', 'email'];
+    protected $fillable = ['name', 'email'];
 
-	public function sections()
-	{
-		return $this->hasMany('\Courses\Section');
-	}
+    protected $casts = [
+        'id' => 'int',
+    ];
+
+    public function sections()
+    {
+        return $this->hasMany(Section::class);
+    }
 
 }

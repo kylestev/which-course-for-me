@@ -1,22 +1,28 @@
-<?php namespace Courses\Transformers;
+<?php
 
-class InstructorTransformer extends Transformer {
+namespace Courses\Transformers;
 
-	protected function transformItem($item)
-	{
-		return [
-			'id' => (int) $item['id'],
-			'name' => $item['name'],
-			'email' => $item['email'],
-		];
-	}
+use Courses\Instructor;
+use League\Fractal\TransformerAbstract;
 
-	protected function getLinkParams()
-	{
-		return [
-			'instructor' => ['instructors.show', ['id']],
-			'instructors' => ['instructors.index', []],
-		];
-	}
+class InstructorTransformer extends TransformerAbstract
+{
+
+    public function transform(Instructor $instructor)
+    {
+        return [
+            'id'    => $instructor->id,
+            'name'  => $instructor->name,
+            'email' => $instructor->email,
+        ];
+    }
+
+    protected function getLinkParams()
+    {
+        return [
+            'instructor'  => ['instructors.show', ['id']],
+            'instructors' => ['instructors.index', []],
+        ];
+    }
 
 }

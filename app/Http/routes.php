@@ -2,17 +2,6 @@
 
 use Courses\Repositories\Subject\SubjectRepositoryInterface;
 
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the controller to call when that URI is requested.
-|
- */
-
 Route::group(['namespace' => 'Api', 'domain' => sprintf('api.%s', env('APP_DOMAIN'))], function () {
     Route::get('/', [
         'as'   => 'api.root',
@@ -60,6 +49,6 @@ Route::group(['namespace' => 'Frontend', 'domain' => env('APP_DOMAIN')], functio
 
 if (App::environment() == 'local') {
     Route::get('scrape', function () {
-        Queue::push('Courses\Jobs\Scraper\ScrapeSubjects@scrape', ['term' => 'F15', 'campus' => 'corvallis']);
+        Queue::push('Courses\Jobs\Scraper\ScrapeSubjects@scrape', ['term' => 'W16', 'campus' => 'corvallis']);
     });
 }

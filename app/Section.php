@@ -1,34 +1,43 @@
-<?php namespace Courses;
+<?php
+
+namespace Courses;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Section extends Model {
+class Section extends Model
+{
 
-	protected $table = 'sections';
+    protected $table = 'sections';
 
-	public function course()
-	{
-		return $this->belongsTo('\Courses\Course');
-	}
+    protected $casts = [
+        'id'             => 'int',
+        'credits'        => 'int',
+        'section_number' => 'int',
+    ];
 
-	public function enrollment_current()
-	{
-		return $this->hasOne('\Courses\SectionEnrollment', 'id', 'current_enrollment_id');
-	}
+    public function course()
+    {
+        return $this->belongsTo(Course::class);
+    }
 
-	public function enrollment_waitlist()
-	{
-		return $this->hasOne('\Courses\SectionEnrollment', 'id', 'waitlist_enrollment_id');
-	}
+    public function enrollment_current()
+    {
+        return $this->hasOne(SectionEnrollment::class, 'id', 'current_enrollment_id');
+    }
 
-	public function instructor()
-	{
-		return $this->hasOne('\Courses\Instructor', 'id', 'instructor_id');
-	}
+    public function enrollment_waitlist()
+    {
+        return $this->hasOne(SectionEnrollment::class, 'id', 'waitlist_enrollment_id');
+    }
 
-	public function section_type()
-	{
-		return $this->hasOne('\Courses\SectionType', 'id', 'section_type_id');
-	}
+    public function instructor()
+    {
+        return $this->hasOne(Instructor::class, 'id', 'instructor_id');
+    }
+
+    public function section_type()
+    {
+        return $this->hasOne(SectionType::class, 'id', 'section_type_id');
+    }
 
 }
