@@ -10,7 +10,7 @@ class SubjectController extends FrontendController
     public function index(SubjectRepositoryInterface $repo, Request $request)
     {
         $page      = $request->input('page', 1);
-        $paginator = $repo->getPaginator($page);
+        $paginator = $repo->getPaginator();
         $paginator->setPath('/' . $request->path());
 
         return $this->view->make('frontend.subjects.index', [
@@ -26,7 +26,7 @@ class SubjectController extends FrontendController
     ) {
         $subj      = $subjectRepo->find($subject_id);
         $page      = $request->input('page', 1);
-        $paginator = $repo->getPaginator($subject_id, $page);
+        $paginator = $repo->getPaginator($subject_id);
         $paginator->setPath('/' . $request->path());
 
         return $this->view->make('frontend.subjects.show', [

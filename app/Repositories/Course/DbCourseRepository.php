@@ -29,15 +29,9 @@ class DbCourseRepository implements CourseRepositoryInterface
                     ->get();
     }
 
-    public function getPaginator($subject_id, $page, $per_page = 15)
+    public function getPaginator($subject_id, $per_page = 15)
     {
-        $count = $this->findBySubjectId($subject_id)->count();
-        $items = $this->findBySubjectId($subject_id)
-                      ->skip(($page - 1) * $per_page)
-                      ->take($per_page)
-                      ->get();
-
-        return new \Illuminate\Pagination\LengthAwarePaginator($items, $count, $per_page, $page);
+        return $this->findBySubjectId($subject_id)->paginate($per_page);
     }
 
 }

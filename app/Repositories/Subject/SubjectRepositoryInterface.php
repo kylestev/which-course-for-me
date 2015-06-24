@@ -9,6 +9,6 @@ interface SubjectRepositoryInterface extends RepositoryInterface
 
     public function find($id);
     public function paginateResults();
-    public function getPaginator($page, $per_page = 15);
+    public function getPaginator($per_page = 15);
 
 }

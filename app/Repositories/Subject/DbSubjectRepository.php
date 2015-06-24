@@ -26,15 +26,9 @@ class DbSubjectRepository implements SubjectRepositoryInterface
             ->get();
     }
 
-    public function getPaginator($page, $per_page = 15)
+    public function getPaginator($per_page = 15)
     {
-        $count = Subject::count();
-        $items = Subject::orderBy('id', 'asc')
-            ->skip(($page - 1) * $per_page)
-            ->take($per_page)
-            ->get();
-
-        return new \Illuminate\Pagination\LengthAwarePaginator($items, $count, $per_page, $page);
+        return Subject::paginate($per_page);
     }
 
 }
