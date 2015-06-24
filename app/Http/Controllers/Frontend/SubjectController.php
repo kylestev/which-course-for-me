@@ -1,35 +1,40 @@
 <?php namespace Courses\Http\Controllers\Frontend;
 
-use Courses\Course;
-use Courses\Subject;
-use Courses\Repositories\Subject\SubjectRepositoryInterface;
 use Courses\Repositories\Course\CourseRepositoryInterface;
-use Courses\Transformers\CourseTransformer;
+use Courses\Repositories\Subject\SubjectRepositoryInterface;
+use Illuminate\Http\Request;
 
-class SubjectController extends FrontendController {
+class SubjectController extends FrontendController
+{
 
-	public function index(SubjectRepositoryInterface $repo)
-	{
-		return $this->view->make('frontend.subjects.index', [
-			'subjects' => $repo->paginateResults(),
-		]);
-	}
+    public function index(SubjectRepositoryInterface $repo, Request $request)
+    {
+        $page      = $request->input('page', 1);
+        $paginator = $repo->getPaginator($page);
+        $paginator->setPath('/' . $request->path());
 
-	public function show(
-		SubjectRepositoryInterface $subjectRepo,
-		CourseRepositoryInterface $repo,
-		$subject_id
-	)
-	{
-		$subj = $subjectRepo->find($subject_id);
-		$courses = $repo->paginateResults($subject_id);
+        return $this->view->make('frontend.subjects.index', [
+            'subjects' => $paginator,
+        ]);
+    }
 
-		return $this->view->make('frontend.subjects.show', [
-			'subj' => $subj,
-			'courses' => $courses,
-			'single_page' => true,
-			'title' => sprintf('Which Course For Me | %s (%s) Courses', $subj['name'], $subj['id']),
-		]);
-	}
+    public function show(
+        SubjectRepositoryInterface $subjectRepo,
+        CourseRepositoryInterface $repo,
+        $subject_id,
+        Request $request
+    ) {
+        $subj      = $subjectRepo->find($subject_id);
+        $page      = $request->input('page', 1);
+        $paginator = $repo->getPaginator($subject_id, $page);
+        $paginator->setPath('/' . $request->path());
+
+        return $this->view->make('frontend.subjects.show', [
+            'subj'        => $subj,
+            'courses'     => $paginator,
+            'single_page' => true,
+            'title'       => sprintf('Which Course For Me | %s (%s) Courses', $subj['name'], $subj['id']),
+        ]);
+    }
 
 }

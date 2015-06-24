@@ -51,4 +51,3 @@
 	</center>
 
 @stop
-
